@@ -1,0 +1,307 @@
+---
+title: "Occupancy analysis"
+author: "Julie K. Sheard"
+date: "19 feb 2019"
+output: html_document
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Initial set-up
+
+## Load libraries
+```{r}
+library(sparta)
+```
+
+## Load data 
+Load occupancy model data files one at a time 
+```{r}
+
+load("C:/Users/julie/Documents/Projects/Occupancy/output/para_out_50.Rdata") #50.000
+
+load("C:/Users/julie/Documents/Projects/Occupancy/output/para_out_100.Rdata") #100.000
+
+load("C:/Users/julie/Documents/Projects/Occupancy/output/para_out_200.Rdata") #200.000
+
+load("C:/Users/julie/Documents/Projects/Occupancy/output/para_out_400r.Rdata") #400.000
+
+load("C:/Users/julie/Documents/Projects/Occupancy/output/para_out_600.Rdata") #600.000
+
+#Rename para_out after loading. One at a time. 
+para_out <- para_out_50
+para_out <- para_out_100
+para_out <- para_out_200
+para_out <- para_out_400
+para_out <- para_out_600
+
+#Name by species
+for(i in 1:length(para_out)) names(para_out)[i] <- para_out[[i]]$SPP_NAM
+```
+
+##Get Rhats for each species
+```{r}
+for(i in 1:length(para_out)) {
+  Rhat_mean <- mean(para_out[[i]]$BUGSoutput$summary[29:40,8])
+  Rhat_max <- max(para_out[[i]]$BUGSoutput$summary[29:40,8])
+  Rhat_min <- min(para_out[[i]]$BUGSoutput$summary[29:40,8])
+  print(Rhat_mean)
+  print(Rhat_max)
+  print(Rhat_min)
+}
+```
+
+##Get precision for each species
+```{r}
+for(i in 1:length(para_out)) {
+  Precision <- para_out[[i]]$BUGSoutput$summary[42,1]
+  print(Precision)
+}
+```
+
+##Get mean occupancy and confidence intervals for each time period
+````{r}
+#Get mean occupancy and CI for 1900-1909
+for(i in 1:length(para_out)) {
+  means_1900<-mean(para_out[[i]]$BUGSoutput$sims.matrix[,29])
+  UCI <- quantile(para_out[[i]]$BUGSoutput$sims.matrix[,29], probs = 0.95)
+  LCI <-  quantile(para_out[[i]]$BUGSoutput$sims.matrix[,29], probs = 0.05)
+  SD <- sd(para_out[[i]]$BUGSoutput$sims.matrix[,29])
+  print(means_1900)
+  #print(SD)
+  print(UCI)
+  print(LCI)
+}
+
+#Get mean occupancy and CI for 1910-1919
+for(i in 1:length(para_out)) {
+  means_1910<-mean(para_out[[i]]$BUGSoutput$sims.matrix[,30])
+  UCI <- quantile(para_out[[i]]$BUGSoutput$sims.matrix[,30], probs = 0.95)
+  LCI <-  quantile(para_out[[i]]$BUGSoutput$sims.matrix[,30], probs = 0.05)
+  SD <- sd(para_out[[i]]$BUGSoutput$sims.matrix[,30])
+  print(means_1910)
+  #print(SD)
+  print(UCI)
+  print(LCI)
+}
+
+#Get mean occupancy and CI for 1920-1929
+for(i in 1:length(para_out)) {
+  means_1920<-mean(para_out[[i]]$BUGSoutput$sims.matrix[,31])
+  UCI <- quantile(para_out[[i]]$BUGSoutput$sims.matrix[,31], probs = 0.95)
+  LCI <-  quantile(para_out[[i]]$BUGSoutput$sims.matrix[,31], probs = 0.05)
+  SD <- sd(para_out[[i]]$BUGSoutput$sims.matrix[,31])
+  print(means_1920)
+  #print(SD)
+  print(UCI)
+  print(LCI)
+}
+
+#Get mean occupancy and CI for 1930-1939
+for(i in 1:length(para_out)) {
+  means_1930<-mean(para_out[[i]]$BUGSoutput$sims.matrix[,32])
+  UCI <- quantile(para_out[[i]]$BUGSoutput$sims.matrix[,32], probs = 0.95)
+  LCI <-  quantile(para_out[[i]]$BUGSoutput$sims.matrix[,32], probs = 0.05)
+  SD <- sd(para_out[[i]]$BUGSoutput$sims.matrix[,32])
+  print(means_1930)
+  #print(SD)
+  print(UCI)
+  print(LCI)
+}
+
+#Get mean occupancy and CI for 1940-1949
+for(i in 1:length(para_out)) {
+  means_1940<-mean(para_out[[i]]$BUGSoutput$sims.matrix[,33])
+  UCI <- quantile(para_out[[i]]$BUGSoutput$sims.matrix[,33], probs = 0.95)
+  LCI <-  quantile(para_out[[i]]$BUGSoutput$sims.matrix[,33], probs = 0.05)
+  SD <- sd(para_out[[i]]$BUGSoutput$sims.matrix[,33])
+  print(means_1940)
+  #print(SD)
+  print(UCI)
+  print(LCI)
+}
+
+#Get mean occupancy and CI for 1950-1959
+for(i in 1:length(para_out)) {
+  means_1950<-mean(para_out[[i]]$BUGSoutput$sims.matrix[,34])
+  UCI <- quantile(para_out[[i]]$BUGSoutput$sims.matrix[,34], probs = 0.95)
+  LCI <-  quantile(para_out[[i]]$BUGSoutput$sims.matrix[,34], probs = 0.05)
+  SD <- sd(para_out[[i]]$BUGSoutput$sims.matrix[,34])
+  print(means_1950)
+  #print(SD)
+  print(UCI)
+  print(LCI)
+}
+
+#Get mean occupancy and CI for 1960-1969
+for(i in 1:length(para_out)) {
+  means_1960<-mean(para_out[[i]]$BUGSoutput$sims.matrix[,35])
+  UCI <- quantile(para_out[[i]]$BUGSoutput$sims.matrix[,35], probs = 0.95)
+  LCI <-  quantile(para_out[[i]]$BUGSoutput$sims.matrix[,35], probs = 0.05)
+  SD <- sd(para_out[[i]]$BUGSoutput$sims.matrix[,35])
+  print(means_1960)
+  #print(SD)
+  print(UCI)
+  print(LCI)
+}
+
+#Get mean occupancy and CI for 1970-1979
+for(i in 1:length(para_out)) {
+  means_1970<-mean(para_out[[i]]$BUGSoutput$sims.matrix[,36])
+  UCI <- quantile(para_out[[i]]$BUGSoutput$sims.matrix[,36], probs = 0.95)
+  LCI <-  quantile(para_out[[i]]$BUGSoutput$sims.matrix[,36], probs = 0.05)
+  SD <- sd(para_out[[i]]$BUGSoutput$sims.matrix[,36])
+  print(means_1970)
+  #print(SD)
+  print(UCI)
+  print(LCI)
+}
+
+#Get mean occupancy and CI for 1980-1989
+for(i in 1:length(para_out)) {
+  means_1980<-mean(para_out[[i]]$BUGSoutput$sims.matrix[,37])
+  UCI <- quantile(para_out[[i]]$BUGSoutput$sims.matrix[,37], probs = 0.95)
+  LCI <- quantile(para_out[[i]]$BUGSoutput$sims.matrix[,37], probs = 0.05)
+  SD <- sd(para_out[[i]]$BUGSoutput$sims.matrix[,37])
+  print(means_1980)
+  #print(SD)
+  print(UCI)
+  print(LCI)
+}
+
+#Get mean occupancy and CI for 1990-1999
+for(i in 1:length(para_out)) {
+  means_1990<-mean(para_out[[i]]$BUGSoutput$sims.matrix[,38])
+  UCI <- quantile(para_out[[i]]$BUGSoutput$sims.matrix[,38], probs = 0.95)
+  LCI <-  quantile(para_out[[i]]$BUGSoutput$sims.matrix[,38], probs = 0.05)
+  SD <- sd(para_out[[i]]$BUGSoutput$sims.matrix[,38])
+  print(means_1990)
+  #print(SD)
+  print(UCI)
+  print(LCI)
+}
+
+#Get mean occupancy and CI for 2000-2009
+for(i in 1:length(para_out)) {
+  means_2000<-mean(para_out[[i]]$BUGSoutput$sims.matrix[,39])
+  UCI <- quantile(para_out[[i]]$BUGSoutput$sims.matrix[,39], probs = 0.95)
+  LCI <-  quantile(para_out[[i]]$BUGSoutput$sims.matrix[,39], probs = 0.05)
+  SD <- sd(para_out[[i]]$BUGSoutput$sims.matrix[,39])
+  print(means_2000)
+  #print(SD)
+  print(UCI)
+  print(LCI)
+}
+
+#Get mean occupancy and CI for 2010-2019
+for(i in 1:length(para_out)) {
+  means_2010<-mean(para_out[[i]]$BUGSoutput$sims.matrix[,40])
+  UCI <- quantile(para_out[[i]]$BUGSoutput$sims.matrix[,40], probs = 0.95)
+  LCI <-  quantile(para_out[[i]]$BUGSoutput$sims.matrix[,40], probs = 0.05)
+  SD <- sd(para_out[[i]]$BUGSoutput$sims.matrix[,40])
+  print(means_2010)
+  #print(SD)
+  print(UCI)
+  print(LCI)
+}
+```
+
+##Get occupancy change between two centuries
+```{r}
+for(i in 1:length(para_out)) {
+ c20 <- apply(para_out[[i]]$BUGSoutput$sims.matrix[,29:38], 1, mean)
+ c21 <- apply(para_out[[i]]$BUGSoutput$sims.matrix[,39:40], 1, mean)
+ change <- ((c21-c20)/c20)*100
+ mean_change <- mean(change)
+ UCI <- quantile(change, probs = 0.95)
+ LCI <-  quantile(change, probs = 0.05)
+ print(mean_change)
+ print(UCI)
+ print(LCI)
+ }
+
+```
+
+##Test whether occupancy is significantly different in two centuries
+```{r}
+for(i in 1:length(para_out)) {
+ c20 <- apply(para_out[[i]]$BUGSoutput$sims.matrix[,29:38], 1, mean)
+ c21 <- apply(para_out[[i]]$BUGSoutput$sims.matrix[,39:40], 1, mean)
+ mean_c20 <- mean(c20)
+ min_c20 <- min(c20)
+ max_c20 <- max(c20)
+ c20_sd <- sd(c20)
+ mean_c21 <- mean(c21)
+ min_c21 <- min(c21)
+ max_c21 <- max(c21)
+ c21_sd <- sd(c21)
+ cdiff <- c21-c20
+ c20hi <- mean(cdiff < 0)
+ c21hi <- mean(cdiff > 0)
+ TwoTailedp <- min(c20hi, c21hi) * 2
+ print(mean_c20)
+ print(min_c20)
+ print(max_c20)
+ print(c20_sd)
+ print(mean_c21)
+ print(min_c21)
+ print(max_c21)
+ print(c21_sd)
+ print(mean(cdiff))
+ print(c20hi)
+ print(c21hi)
+ print(TwoTailedp)
+}
+```
+
+##Get occupancy change across entire study period 1900-1909 to 2010-2019 
+```{r}
+for(i in 1:length(para_out)) {
+ First <- para_out[[i]]$BUGSoutput$sims.matrix[,29]
+ Last <- para_out[[i]]$BUGSoutput$sims.matrix[,40]
+ change <- ((Last-First)/First)*100
+ change <- change[is.finite((change))] #remove NA's and inf
+ mean_change <- mean(change)
+ UCI <- quantile(change, probs = 0.95)
+ LCI <-  quantile(change, probs = 0.05)
+ print(mean_change)
+ print(UCI)
+ print(LCI)
+ }
+```
+
+##Test whether occupancy is significantly different in 1900-1909 and 2010-2019
+```{r}
+for(i in 1:length(para_out)) {
+ First <- para_out[[i]]$BUGSoutput$sims.matrix[,29]
+ Last <- para_out[[i]]$BUGSoutput$sims.matrix[,40]
+ mean_First <- mean(First)
+ #min_First <- min(First)
+ #max_First <- max(First)
+ #First_sd <- sd(First)
+ mean_Last <- mean(Last)
+ #min_Last <- min(Last)
+ #max_Last <- max(Last)
+ #Last_sd <- sd(Last)
+ cdiff <- Last-First #mean(Last-First) to get mean for each species
+ cdiff1 <- mean(Last-First)
+ Firsthi <- mean(cdiff < 0)
+ Lasthi <- mean(cdiff > 0)
+ TwoTailedp <- min(Firsthi, Lasthi) * 2
+ #print(mean_First)
+ #print(min_First)
+ #print(max_First)
+ #print(First_sd)
+ #print(mean_Last)
+ #print(min_Last)
+ #print(max_Last)
+ #print(Last_sd)
+ print(cdiff1)
+ print(Firsthi)
+ print(Lasthi)
+ print(TwoTailedp)
+}
+```

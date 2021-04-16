@@ -1,0 +1,133 @@
+---
+title: "Occupancy figures"
+author: "Julie Sheard"
+date: "30/7/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+This is the script to create figure 2 of the paper, illustrating occupancy change for each species from 1900-1909 to 2000-2019
+
+# Intial set-up
+
+## Load packages
+```{r}
+library(ggplot2)
+library(directlabels)
+library(cowplot)
+```
+
+## Load data
+```{r}
+#Load occupancy analysis outputs
+trend <- read.csv("../data/occupancy plot.csv", sep=",", header=TRUE)
+
+#Load data for first and last record
+points <- read.csv("../data/first_last_record.csv", sep=",", header=TRUE)
+
+```
+
+# Create figure 2
+```{r}
+#Subset data
+Increasing <- trend[trend$Trend== 'Increasing',]
+Declining <- trend[trend$Trend== 'Declining',]
+Stable <- trend[trend$Trend== 'Stable',]
+Fluctuating <- trend[trend$Trend== 'Fluctuating',]
+
+Point_inc <- points[points$Trend== 'Increasing',]
+Point_dec <- points[points$Trend== 'Declining',]
+Point_stable <- points[points$Trend== 'Stable',]
+Point_fluc <- points[points$Trend== 'Fluctuating',]
+
+
+#Plots for each type of trend
+(Inc_plot<-ggplot(data=Increasing, aes(x=TP, y=Occupancy, group = Species, color=Species, fill=Species)) +
+  geom_line(size=1)+
+  geom_point(data=Point_inc, size=2, aes(x=TP, y=Occupancy, group = Species,  color = Species, fill=Species)) +
+  ggtitle("  a) Increasing") +
+  labs(y="Occupancy", x = "")+
+  scale_color_manual(values = c("#543005", "#66c2a4", "#67A9CF", "#D94801")) +
+  geom_dl(aes(label = ID), method = list("last.bumpup",
+          cex = 0.9)) +
+  scale_y_continuous(limits=c(0,1.1), breaks=seq(0,1,0.1)) +
+  theme_classic(base_size = 12)+
+  theme(panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank(),
+        plot.title = element_text(margin = margin(b = -20)),
+        legend.position = "none",
+        axis.text    = element_text(),
+        legend.title = element_blank(),
+        axis.text.x = element_text(angle = 45, hjust =1))   )
+
+(Dec_plot<-ggplot(data=Declining, aes(x=TP, y=Occupancy, group = Species, color=Species, fill=Species)) +
+    geom_line(size=1)+
+    geom_point(data=Point_dec, size=2, aes(x=TP, y=Occupancy, group = Species,  color = Species, fill=Species)) +
+    ggtitle("  b) Declining") +
+    labs(y="", x = "")+
+    scale_color_manual(values = c("#54278f", "#a63603", "#fd8d3c", "#fdd0a2")) +
+    geom_dl(aes(label = ID), method = list("last.bumpup",
+          cex = 0.9)) +
+    scale_y_continuous(limits=c(0,1.1), breaks=seq(0,1,0.1)) +
+    theme_classic(base_size = 12)+
+    theme(panel.grid.major = element_blank(),
+          panel.grid.minor = element_blank(),
+          legend.position = "none",
+          plot.title = element_text(margin = margin(b = -20)),
+          axis.text    = element_text(),
+          axis.text.x = element_text(angle = 45, hjust =1))   )
+
+(Mix_plot<-ggplot(data=Fluctuating, aes(x=TP, y=Occupancy, group = Species, color=Species, fill=Species)) +
+    geom_line(size=1)+
+    geom_point(data=Point_fluc, size=2, aes(x=TP, y=Occupancy, group = Species,  color = Species, fill=Species)) +
+    ggtitle("  c) Fluctuating") +
+    labs(y="Occupancy", x = "Decade")+
+    scale_color_manual(values = c("#99d8c9", "#3690c0", "#2A91A6", "#015C63", "#9e9ac8", "#824B08")) +
+    geom_dl(aes(label = ID), method = list("last.bumpup",
+          cex = 0.9)) +
+    scale_y_continuous(limits=c(0,1.1), breaks=seq(0,1,0.1)) +
+    theme_classic(base_size = 12)+
+    theme(panel.grid.major = element_blank(),
+          panel.grid.minor = element_blank(),
+          plot.title = element_text(margin = margin(b = -20)),
+          legend.position = "none",
+          axis.text    = element_text(),
+          axis.text.x = element_text(angle = 45, hjust =1))   )
+
+(Stable_plot<-ggplot(data=Stable, aes(x=TP, y=Occupancy, group = Species, color=Species, fill=Species)) +
+    geom_line(size=1)+
+    geom_point(data=Point_stable, size=2, aes(x=TP, y=Occupancy, group = Species,  color = Species, fill=Species)) +
+    ggtitle("  d) Stable") +
+    labs(y="", x = "Decade")+
+     scale_color_manual(values = c("#00441b", "#006d2c", "#238b45", "#41ae76", "#ccece6", "#B8E1E6", 
+                                   "#02818a", "#df65b0", "#3f007d", "#6a51a3", "#807dba", "#fee391",
+                                   "#8c2d04", "#f16913", "#fdae6b")) +
+    geom_dl(aes(label = ID), method = list("last.bumpup",
+          cex = 0.9)) +
+    scale_y_continuous(limits=c(0,1.1), breaks=seq(0,1,0.1)) +
+    theme_classic(base_size = 12)+
+    theme(panel.grid.major = element_blank(),
+          panel.grid.minor = element_blank(),
+          plot.title = element_text(margin = margin(b = -20)),
+          legend.position = "none",
+          axis.text    = element_text(),
+          axis.text.x = element_text(angle = 45, hjust =1))   )
+
+```
+
+# Arrange and save plot as .png
+```{r}
+png("Fig2.png", width = 1200, height = 750)
+plot_grid(Inc_plot, Dec_plot, Mix_plot, Stable_plot)
+dev.off()
+```
+
+#Arrange and save plot as pdf
+```{r}
+pdf("Fig2.pdf")
+plot_grid(Inc_plot, Dec_plot, Mix_plot, Stable_plot)
+dev.off()
+```
