@@ -1,0 +1,167 @@
+---
+title: "SD analysis"
+author: "Julie K. Sheard"
+date: "18 jul 2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Initial set-up
+
+## Load packages
+```{r}
+library(ggplot2)
+library(cowplot)
+```
+
+## Load data
+```{r}
+df <- read.csv("../data/ci_decades.csv", sep=",", header = TRUE)
+```
+
+# Create figure 
+
+## Plot uncertainty against observations per species per decade
+```{r}
+(Obs<- ggplot(aes(y=SD.breadth, x=Detections, color=Species), data = df)+ 
+   geom_point() +
+   scale_color_manual(values = c("#543005", "#00441B", "#006D2C", "#238B45", 
+                                 "#41AE76", "#66C2A4", "#99D8C9", "#CCECE6", 
+                                 "#B8E1E6", "#67A9CF", "#3690C0", "#2A91A6", 
+                                 "#02818A", "#015C63", "#DF65B0", "#3F007D",
+                                 "#54278F", "#6A51A3", "#807DBA", "#9E9AC8",
+                                 "#FEE391", "#8C2D04", "#A63603", "#D94801",
+                                 "#F16913", "#FD8D3C", "#FDAE6B", "#FDD0A2",
+                                 "#824B08")) +
+   geom_smooth(method="lm", se = FALSE, colour = "black") +
+   theme_classic(base_size = 18) +
+   ylim(0,1)+
+   ylab("Uncertainty") +
+   xlab("Detections") + 
+   theme(legend.title = element_blank(),
+         legend.position = "none",
+         legend.text = element_text(face = "italic"), 
+         panel.border = element_blank(),
+         panel.grid.major = element_blank(),
+         panel.grid.minor = element_blank(),
+         # Change axis line
+         axis.line = element_line(colour = "black"),
+         #legend.position = "none",
+         axis.text=element_text(size=18),
+         axis.title=element_text(size=20,face="bold")) +
+   guides(fill=guide_legend(keywidth=0.4,
+         keyheight=0.1,
+         default.unit="inch")
+ ))
+```
+
+## Plot uncertainty against occupancy for each species in each decade
+```{r}
+(Occ<- ggplot(aes(y=SD.breadth, x=Mean.occupancy, color=Species), data = df)+ 
+   geom_point() +
+   scale_color_manual(values = c("#543005", "#00441B", "#006D2C", "#238B45", 
+                                 "#41AE76", "#66C2A4", "#99D8C9", "#CCECE6", 
+                                 "#B8E1E6", "#67A9CF", "#3690C0", "#2A91A6", 
+                                 "#02818A", "#015C63", "#DF65B0", "#3F007D",
+                                 "#54278F", "#6A51A3", "#807DBA", "#9E9AC8",
+                                 "#FEE391", "#8C2D04", "#A63603", "#D94801",
+                                 "#F16913", "#FD8D3C", "#FDAE6B", "#FDD0A2",
+                                 "#824B08")) +
+   geom_smooth(colour = "black", method = lm, formula = y ~ x + I(x^2), se = FALSE) +
+   theme_classic(base_size = 18) +
+   ylim(0,1)+
+   ylab("") +
+   xlab("Occupancy") + 
+   theme(legend.title = element_blank(),
+         legend.position = "none",
+         legend.text = element_text(face = "italic"), 
+         panel.border = element_blank(),
+         panel.grid.major = element_blank(),
+         panel.grid.minor = element_blank(),
+         # Change axis line
+         axis.line = element_line(colour = "black"),
+         #legend.position = "none",
+         axis.text=element_text(size=18),
+         axis.title=element_text(size=20,face="bold")) +
+   guides(fill=guide_legend(keywidth=0.4,
+         keyheight=0.1,
+         default.unit="inch")
+ ))
+```
+
+## Plot unceertainty against decade
+```{r}
+(tp<- ggplot(aes(y=SD.breadth, x=Decade, color=Species), data = df)+ 
+   geom_point() +
+   scale_color_manual(values = c("#543005", "#00441B", "#006D2C", "#238B45", 
+                                 "#41AE76", "#66C2A4", "#99D8C9", "#CCECE6", 
+                                 "#B8E1E6", "#67A9CF", "#3690C0", "#2A91A6", 
+                                 "#02818A", "#015C63", "#DF65B0", "#3F007D",
+                                 "#54278F", "#6A51A3", "#807DBA", "#9E9AC8",
+                                 "#FEE391", "#8C2D04", "#A63603", "#D94801",
+                                 "#F16913", "#FD8D3C", "#FDAE6B", "#FDD0A2",
+                                 "#824B08")) +
+   geom_smooth(colour = "black", method = lm, formula = y ~ x + I(x^2), se = FALSE) +
+   theme_classic(base_size = 18) +
+   ylim(0,1)+
+   ylab("") +
+   xlab("Decade") + 
+   scale_x_continuous(breaks = seq(1, 12, by = 1), labels=c("1" = "1900-1909", "2" = "", "3" = "", "4" = "", "5" = "", "6" = "1950-1959", "7" = "", "8" = "", "9" = "", "10" = "", "11" = "2000-2009", "12" = "" )) +
+   theme(legend.title = element_blank(),
+         legend.text = element_text(face = "italic"), 
+         panel.border = element_blank(),
+         panel.grid.major = element_blank(),
+         panel.grid.minor = element_blank(),
+         # Change axis line
+         axis.line = element_line(colour = "black"),
+         legend.position = "none",
+         axis.text=element_text(size=18),
+         axis.title=element_text(size=20,face="bold")) +
+   guides(fill=guide_legend(keywidth=0.4,
+         keyheight=0.1,
+         default.unit="inch")
+ ))
+```
+
+## Arrange plots 
+```{r}
+png("Fig3.png", width = 1100, height = 350)
+plot_grid(Obs, Occ, tp, ncol=3, align="v", labels = c("a)", "b)", "c)"))
+dev.off()
+```
+
+# Analyses for uncertainty plot
+
+## Test for effect of observations on CI breadth, linear and polynomial regression
+```{r}
+Occ_lin  <- lm(SD.breadth ~ Detections + factor(Species), data=df)
+Occ_2 <- lm(SD.breadth~poly(Detections,2,raw=TRUE) + factor(Species), data=df)
+
+AIC(Occ_lin, Occ_2)
+
+summary(Occ_lin)
+```
+
+## Test for effect of occupancy on SD breadth, linear and polynomial regression
+```{r}
+Occ_lin  <- lm(SD.breadth ~ Mean.occupancy + factor(Species), data=df)
+Occ_2 <- lm(SD.breadth~poly(Mean.occupancy,2,raw=TRUE) + factor(Species), data=df)
+
+AIC(Occ_lin, Occ_2)
+
+summary(Occ_lin)
+summary(Occ_2)
+```
+
+## Test for effect of decade on SD breadth, linear and polynomial regression
+```{r}
+Occ_lin  <- lm(SD.breadth ~ Decade + factor(Species), data=df)
+Occ_2 <- lm(SD.breadth~poly(Decade,2,raw=TRUE) + factor(Species), data=df)
+
+AIC(Occ_lin, Occ_2)
+
+summary(Occ_2)
+```
