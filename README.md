@@ -35,7 +35,7 @@ The analyses code is divided into .Rmd files
 
 #### Code for functions
 
-### Not included
+#### Not included
 
 * Figure 1b, which was created using ArcGIS
 * Figure S2, which was created using ArcGIS
