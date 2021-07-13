@@ -34,6 +34,7 @@ These were manually georeferenced and cleaned so that we excluded detections of 
 
 * fig S3-list lengths.Rmd
 * fig S4-individual species plots.Rmd
+* fig S6-uncertainty.Rmd
 
 #### Code for functions
 
