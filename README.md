@@ -24,8 +24,9 @@ We used seven sources of data: 1. pinned specimen records from the Natural Histo
 
 These were manually georeferenced and cleaned so that we excluded detections of unidentified species, those without collection date or geographic coordinates and non-native species. Using ArcGIS, remaining data were binned into 10 x 10 km grid cells and 10 year time-periods (decades). The combined data set used in this study will be uploaded to Dryad upon the acceptance of the paper. 
 
-## Analyses
-The analyses code is divided into .Rmd files
+## Scripts
+
+#### Code for analyses
 
 * File 1
 
