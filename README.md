@@ -26,6 +26,10 @@ These were manually georeferenced and cleaned so that we excluded detections of 
 
 >Sheard J K, Rahbek C, Dunn R R, Sanders N J, Isaac N J (2021). Data from: Long-term trends in the occupancy of ants revealed through multi-sourced data sets. Dryad, Dataset, https://doi.org/10.5061/dryad.bnzs7h4bj
 
+## Analysis outputs
+
+Based on the analyses of the combined data, further data sets were created, which have been uploaded here. The full model results have been uploaded to Dryad together with the original data and can be found here: https://doi.org/10.5061/dryad.bnzs7h4bj
+
 ## Scripts
 
 #### Code for analyses
