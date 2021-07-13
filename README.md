@@ -36,6 +36,9 @@ The analyses code is divided into .Rmd files
 
 #### Code for functions
 
+* Plot_DetectionOne.R
+* plot_Detection12.R
+
 #### Not included
 
 * Figure 1b, which was created using ArcGIS
