@@ -28,7 +28,7 @@ These were manually georeferenced and cleaned so that we excluded detections of 
 
 #### Code for analyses
 
-* File 1
+* 01-format-data.Rmd
 
 #### Code for figures
 
