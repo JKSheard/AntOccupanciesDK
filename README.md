@@ -10,7 +10,7 @@ We used seven sources of data: 1. pinned specimen records from the Natural Histo
 
 >Calabuig I (2014). Danish Ants (Formicidae). Zoological Museum, Natural History Museum of Denmark. Occurrence dataset https://doi.org/10.15468/xcwkfb
 
->Simonsen T, Sheard J K (2021). Natural History Museum of Aarhus Ant Collection. Version 1.2. Center for Macroecology, Evolution and Climate, University of Copenhagen. Occurrence dataset https://doi.org/10.15468/wp3kzr
+>Simonsen T, Sheard J K (2021). Natural History Museum Aarhus Ant Collection. Version 1.2. Natural History Museum Aarhus. Occurrence dataset https://doi.org/10.15468/wp3kzr
 
 >Fiskå A (2018). MUST, Insecta. Version 9.266. Museum Stavanger. Occurrence dataset https://doi.org/10.15468/zkm8mj
 
