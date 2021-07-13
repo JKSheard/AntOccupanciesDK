@@ -32,6 +32,7 @@ The analyses code is divided into .Rmd files
 #### Code for figures
 
 * fig S3-list lengths.Rmd
+* fig S4-individual species plots.Rmd
 
 #### Code for functions
 
