@@ -1,0 +1,62 @@
+---
+title: "Figure S3 - List lengths"
+author: "Julie K. Sheard"
+date: "12 May 2020"
+output:
+  html_document: default
+  pdf_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+The following code is used to produce the electronic supplementary figure S3
+
+# Initial set-up
+
+## Load packages
+```{r, message=FALSE}
+library(dplyr)
+library(ggplot2)
+library(tidyr)
+```
+
+## Load data
+```{r}
+detections <- read.csv("C:/Users/julie/Documents/Projects/Occupancy/data/detections_decades.csv", sep=",", header=TRUE)
+```
+
+## Create figure S3
+
+```{r}
+#summarise number of visits with one, two, three and more than three species
+tally<-detections %>%
+    group_by(origin, data.type) %>%
+    summarize("More than three" = sum(detections > 3), #visits with more than 3 species recorded
+              "Three" = sum(detections == 3), #Visits with exactly 3 species recorded
+              "Two" = sum(detections == 2), #Visits with exactly 2 species recorded
+              "One" = sum(detections == 1)) #Visits with exactly 1 species recorded
+
+output <- gather(tally,Species,count,-origin,-data.type) #Tally the number of visits within each of the above categories for each data set
+
+output$Species <- factor(output$Species, 
+                         levels = c("More than three", "Three", "Two", "One")) #Reorder drawing order for list lengths
+
+output$origin <- factor(output$origin,
+                        levels = c("NHM Denmark", "NHM Aarhus", "C. Skøtt", "H. Holgersen", "S. Schär", "EuroAnts", "The Ant Hunt")) #Redorder drawing order for data sets based on datatype
+
+
+#Plot figure 
+Fig_S3<-ggplot(output, aes(fill=Species, y=count, x=origin)) + 
+    geom_bar(position="fill", stat="identity") +
+    facet_wrap(~data.type, scales="free_x")+
+    theme_classic(base_size=18)+
+    theme(axis.text.x = element_text(angle = 45, hjust =1)) +
+    xlab("Data set") +
+    ylab("Proportion of visits") +
+    scale_fill_manual(values = c("#FDE825", "#21A187", "#287F8E", "#365C8D", "#44317D")) 
+
+#Save figure
+ggsave(filename = "Fig_S3_ListLengths.pdf", plot = Fig_S3, width= 7, height = 5, dpi = 600, path = "./figs")
+```
