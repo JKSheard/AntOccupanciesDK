@@ -31,4 +31,11 @@ The analyses code is divided into .Rmd files
 
 #### Code for figures
 
+* fig S3-list lengths.Rmd
+
 #### Code for functions
+
+### Not included
+
+* Figure 1b, which was created using ArcGIS
+* Figure S2, which was created using ArcGIS
