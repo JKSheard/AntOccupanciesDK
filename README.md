@@ -37,6 +37,7 @@ These were manually georeferenced and cleaned so that we excluded detections of 
 
 #### Code for functions
 
+The following functions are used to create figure S4
 * Plot_DetectionOne.R
 * plot_Detection12.R
 
