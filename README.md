@@ -30,6 +30,11 @@ These were manually georeferenced and cleaned so that we excluded detections of 
 
 Based on the analyses of the combined data, further data sets were created, which have been uploaded here. The full model results have been uploaded to Dryad together with the original data and can be found here: https://doi.org/10.5061/dryad.bnzs7h4bj
 
+* ci_decades.csv
+* detections_decades.csv
+* first_last_record.csv
+* occupancy plot.csv
+
 ## Scripts
 
 #### Code for analyses
