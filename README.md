@@ -34,6 +34,7 @@ These were manually georeferenced and cleaned so that we excluded detections of 
 
 #### Code for figures
 
+* fig 2-occupancy trends.Rmd
 * fig S3-list lengths.Rmd
 * fig S4-individual species plots.Rmd
 * fig S6-uncertainty.Rmd
