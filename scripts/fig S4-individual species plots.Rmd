@@ -1,0 +1,923 @@
+---
+title: "model diagnostics"
+output: html_document
+---
+
+This is the script to create the plots for figure S4. For the detection plots, the last decade was plotted seperately as three data sets (Sämi Schär, EuroAnts and the Ant Hunt) only had data from this decade.
+
+## Load packages
+```{r}
+library(sparta)
+library(ggplot2)
+library(cowplot)
+library(reshape2)
+library(plyr)
+```
+
+# Occupancy and detection plots for species converged at 50,000 iterations
+
+## Load data, 50,000 iterations 
+```{r}
+load("../output/para_out_50.Rdata")
+
+para_out <- para_out_50
+
+for(i in 1:length(para_out)) names(para_out)[i] <- para_out[[i]]$SPP_NAM
+
+```
+
+
+```{r}
+#Camponotus herculeanus
+Camher <- plot(para_out$Camponotus_herculeanus)
+
+Camher_occ <- Camher + theme_classic(base_size = 12) + 
+  scale_x_discrete(name ="Time period", 
+                    limits=c("1900-1909", "1910-1919", "1920-1929", 
+                             "1930-1939", "1940-1949", "1950-1959", 
+                             "1960-1969", "1970-1979", "1980-1989", 
+                             "1990-1999", "2000-2009", "2010-2019")) +
+  theme(axis.text.x = element_text(angle = 45, hjust = 
+                          1), legend.position = "none") +
+  ggtitle(" ") +
+  scale_y_continuous(limits=c(0,1), breaks=seq(0,1,0.1))
+
+Camher_det <- plot_DetectionOne(para_out$Camponotus_herculeanus)
+Camher_det2 <- Camher_det + scale_x_discrete(name ="Time period", 
+                    limits=c("1900-1909", "1910-1919", "1920-1929", 
+                             "1930-1939", "1940-1949", "1950-1959", 
+                             "1960-1969", "1970-1979", "1980-1989", 
+                             "1990-1999", "2000-2009", "2010-2019")) +
+                    theme(axis.text.x = element_text(angle = 45, hjust = 
+                          1))
+
+Camher_12 <- plot_Detection12(para_out$Camponotus_herculeanus)
+Camher_l <- Camher_12 + theme_classic()
+  
+#Formica cinerea
+Forcin <- plot(para_out$Formica_cinerea)
+
+Forcin_occ <- Forcin + theme_classic(base_size = 12) + 
+  scale_x_discrete(name ="Time period", 
+                    limits=c("1900-1909", "1910-1919", "1920-1929", 
+                             "1930-1939", "1940-1949", "1950-1959", 
+                             "1960-1969", "1970-1979", "1980-1989", 
+                             "1990-1999", "2000-2009", "2010-2019")) +
+  theme(axis.text.x = element_text(angle = 45, hjust = 
+                          1), legend.position = "none") +
+  ggtitle(" ") +
+  scale_y_continuous(limits=c(0,1), breaks=seq(0,1,0.1))
+
+Forcin_det <- plot_DetectionOne(para_out$Formica_cinerea)
+Forcin_det2 <- Forcin_det + scale_x_discrete(name ="Time period", 
+                    limits=c("1900-1909", "1910-1919", "1920-1929", 
+                             "1930-1939", "1940-1949", "1950-1959", 
+                             "1960-1969", "1970-1979", "1980-1989", 
+                             "1990-1999", "2000-2009", "2010-2019")) +
+                    theme(axis.text.x = element_text(angle = 45, hjust = 
+                          1))
+
+Forcin_12 <- plot_Detection12(para_out$Formica_cinerea)
+Forcin_l <- Forcin_12 + theme_classic()
+
+#Formica cunicularia
+Forcun <- plot(para_out$Formica_cunicularia)
+
+Forcun_occ <- Forcun + theme_classic(base_size = 12) + 
+  scale_x_discrete(name ="Time period", 
+                    limits=c("1900-1909", "1910-1919", "1920-1929", 
+                             "1930-1939", "1940-1949", "1950-1959", 
+                             "1960-1969", "1970-1979", "1980-1989", 
+                             "1990-1999", "2000-2009", "2010-2019")) +
+  theme(axis.text.x = element_text(angle = 45, hjust = 
+                          1), legend.position = "none") +
+  ggtitle(" ") +
+  scale_y_continuous(limits=c(0,1), breaks=seq(0,1,0.1))
+
+Forcun_det <- plot_DetectionOne(para_out$Formica_cunicularia)
+Forcun_det2 <- Forcun_det + scale_x_discrete(name ="Time period", 
+                    limits=c("1900-1909", "1910-1919", "1920-1929", 
+                             "1930-1939", "1940-1949", "1950-1959", 
+                             "1960-1969", "1970-1979", "1980-1989", 
+                             "1990-1999", "2000-2009", "2010-2019")) +
+                    theme(axis.text.x = element_text(angle = 45, hjust = 
+                          1))
+
+Forcun_12 <- plot_Detection12(para_out$Formica_cunicularia)
+Forcun_l <- Forcun_12 + theme_classic()
+
+
+#Formica polyctena
+Forpol <- plot(para_out$Formica_polyctena)
+
+Forpol_occ <- Forpol + theme_classic(base_size = 12) + 
+  scale_x_discrete(name ="Time period", 
+                    limits=c("1900-1909", "1910-1919", "1920-1929", 
+                             "1930-1939", "1940-1949", "1950-1959", 
+                             "1960-1969", "1970-1979", "1980-1989", 
+                             "1990-1999", "2000-2009", "2010-2019")) +
+  theme(axis.text.x = element_text(angle = 45, hjust = 
+                          1), legend.position = "none") +
+  ggtitle(" ") +
+  scale_y_continuous(limits=c(0,1), breaks=seq(0,1,0.1))
+
+Forpol_det <- plot_DetectionOne(para_out$Formica_polyctena)
+Forpol_det2 <- Forpol_det + scale_x_discrete(name ="Time period", 
+                    limits=c("1900-1909", "1910-1919", "1920-1929", 
+                             "1930-1939", "1940-1949", "1950-1959", 
+                             "1960-1969", "1970-1979", "1980-1989", 
+                             "1990-1999", "2000-2009", "2010-2019")) +
+                    theme(axis.text.x = element_text(angle = 45, hjust = 
+                          1))
+
+Forpol_12 <- plot_Detection12(para_out$Formica_polyctena)
+Forpol_l <- Forpol_12 + theme_classic()
+
+#Formica pressilabris
+Forpre <- plot(para_out$Formica_pressilabris)
+
+Forpre_occ <- Forpre + theme_classic(base_size = 12) + 
+  scale_x_discrete(name ="Time period", 
+                    limits=c("1900-1909", "1910-1919", "1920-1929", 
+                             "1930-1939", "1940-1949", "1950-1959", 
+                             "1960-1969", "1970-1979", "1980-1989", 
+                             "1990-1999", "2000-2009", "2010-2019")) +
+  theme(axis.text.x = element_text(angle = 45, hjust = 
+                          1), legend.position = "none") +
+  ggtitle(" ") +
+  scale_y_continuous(limits=c(0,1), breaks=seq(0,1,0.1))
+
+Forpre_det <- plot_DetectionOne(para_out$Formica_pressilabris)
+Forpre_det2 <- Forpre_det + scale_x_discrete(name ="Time period", 
+                    limits=c("1900-1909", "1910-1919", "1920-1929", 
+                             "1930-1939", "1940-1949", "1950-1959", 
+                             "1960-1969", "1970-1979", "1980-1989", 
+                             "1990-1999", "2000-2009", "2010-2019")) +
+                    theme(axis.text.x = element_text(angle = 45, hjust = 
+                          1))
+
+Forpre_12 <- plot_Detection12(para_out$Formica_pressilabris)
+Forpre_l <- Forpre_12 + theme_classic()
+
+#Formica rufa
+Forruf <- plot(para_out$Formica_rufa)
+
+Forruf_occ <- Forpre + theme_classic(base_size = 12) + 
+  scale_x_discrete(name ="Time period", 
+                    limits=c("1900-1909", "1910-1919", "1920-1929", 
+                             "1930-1939", "1940-1949", "1950-1959", 
+                             "1960-1969", "1970-1979", "1980-1989", 
+                             "1990-1999", "2000-2009", "2010-2019")) +
+  theme(axis.text.x = element_text(angle = 45, hjust = 
+                          1), legend.position = "none") +
+  ggtitle(" ") +
+  scale_y_continuous(limits=c(0,1), breaks=seq(0,1,0.1))
+
+Forruf_det <- plot_DetectionOne(para_out$Formica_rufa)
+Forruf_det2 <- Forruf_det + scale_x_discrete(name ="Time period", 
+                    limits=c("1900-1909", "1910-1919", "1920-1929", 
+                             "1930-1939", "1940-1949", "1950-1959", 
+                             "1960-1969", "1970-1979", "1980-1989", 
+                             "1990-1999", "2000-2009", "2010-2019")) +
+                    theme(axis.text.x = element_text(angle = 45, hjust = 
+                          1))
+
+Forruf_12 <- plot_Detection12(para_out$Formica_rufa)
+Forruf_l <- Forruf_12 + theme_classic()
+
+#Formica rufibarbis
+Forrufi <- plot(para_out$Formica_rufibarbis)
+
+Forrufi_occ <- Forrufi + theme_classic(base_size = 12) + 
+  scale_x_discrete(name ="Time period", 
+                    limits=c("1900-1909", "1910-1919", "1920-1929", 
+                             "1930-1939", "1940-1949", "1950-1959", 
+                             "1960-1969", "1970-1979", "1980-1989", 
+                             "1990-1999", "2000-2009", "2010-2019")) +
+  theme(axis.text.x = element_text(angle = 45, hjust = 
+                          1), legend.position = "none") +
+  ggtitle(" ") +
+  scale_y_continuous(limits=c(0,1), breaks=seq(0,1,0.1))
+
+Forrufi_det <- plot_DetectionOne(para_out$Formica_rufibarbis)
+Forrufi_det2 <- Forrufi_det + scale_x_discrete(name ="Time period", 
+                    limits=c("1900-1909", "1910-1919", "1920-1929", 
+                             "1930-1939", "1940-1949", "1950-1959", 
+                             "1960-1969", "1970-1979", "1980-1989", 
+                             "1990-1999", "2000-2009", "2010-2019")) +
+                    theme(axis.text.x = element_text(angle = 45, hjust = 
+                          1))
+
+Forrufi_12 <- plot_Detection12(para_out$Formica_rufibarbis)
+Forrufi_l <- Forrufi_12 + theme_classic()
+
+#Formica sanguinea
+Forsan <- plot(para_out$Formica_sanguinea)
+
+Forsan_occ <- Forsan + theme_classic(base_size = 12) + 
+  scale_x_discrete(name ="Time period", 
+                    limits=c("1900-1909", "1910-1919", "1920-1929", 
+                             "1930-1939", "1940-1949", "1950-1959", 
+                             "1960-1969", "1970-1979", "1980-1989", 
+                             "1990-1999", "2000-2009", "2010-2019")) +
+  theme(axis.text.x = element_text(angle = 45, hjust = 
+                          1), legend.position = "none") +
+  ggtitle(" ") +
+  scale_y_continuous(limits=c(0,1), breaks=seq(0,1,0.1))
+
+Forsan_det <- plot_DetectionOne(para_out$Formica_sanguinea)
+Forsan_det2 <- Forsan_det + scale_x_discrete(name ="Time period", 
+                    limits=c("1900-1909", "1910-1919", "1920-1929", 
+                             "1930-1939", "1940-1949", "1950-1959", 
+                             "1960-1969", "1970-1979", "1980-1989", 
+                             "1990-1999", "2000-2009", "2010-2019")) +
+                    theme(axis.text.x = element_text(angle = 45, hjust = 
+                          1))
+
+Forsan_12 <- plot_Detection12(para_out$Formica_sanguinea)
+Forsan_l <- Forsan_12 + theme_classic()
+
+#Formica truncorum
+Fortru <- plot(para_out$Formica_truncorum)
+
+Fortru_occ <- Fortru + theme_classic(base_size = 12) + 
+  scale_x_discrete(name ="Time period", 
+                    limits=c("1900-1909", "1910-1919", "1920-1929", 
+                             "1930-1939", "1940-1949", "1950-1959", 
+                             "1960-1969", "1970-1979", "1980-1989", 
+                             "1990-1999", "2000-2009", "2010-2019")) +
+  theme(axis.text.x = element_text(angle = 45, hjust = 
+                          1), legend.position = "none") +
+  ggtitle(" ") +
+  scale_y_continuous(limits=c(0,1), breaks=seq(0,1,0.1))
+
+Fortru_det <- plot_DetectionOne(para_out$Formica_truncorum)
+Fortru_det2 <- Fortru_det + scale_x_discrete(name ="Time period", 
+                    limits=c("1900-1909", "1910-1919", "1920-1929", 
+                             "1930-1939", "1940-1949", "1950-1959", 
+                             "1960-1969", "1970-1979", "1980-1989", 
+                             "1990-1999", "2000-2009", "2010-2019")) +
+                    theme(axis.text.x = element_text(angle = 45, hjust = 
+                          1))
+
+Fortru_12 <- plot_Detection12(para_out$Formica_truncorum)
+Fortru_l <- Fortru_12 + theme_classic()
+
+#Formica uralensis, 50
+Forura <- plot(para_out$Formica_uralensis)
+
+Forura_occ <- Forura + theme_classic(base_size = 12) + 
+  scale_x_discrete(name ="Time period", 
+                    limits=c("1900-1909", "1910-1919", "1920-1929", 
+                             "1930-1939", "1940-1949", "1950-1959", 
+                             "1960-1969", "1970-1979", "1980-1989", 
+                             "1990-1999", "2000-2009", "2010-2019")) +
+  theme(axis.text.x = element_text(angle = 45, hjust = 
+                          1), legend.position = "none") +
+  ggtitle(" ") +
+  scale_y_continuous(limits=c(0,1), breaks=seq(0,1,0.1))
+
+Forura_det <- plot_DetectionOne(para_out$Formica_uralensis)
+Forura_det2 <- Forura_det + scale_x_discrete(name ="Time period", 
+                    limits=c("1900-1909", "1910-1919", "1920-1929", 
+                             "1930-1939", "1940-1949", "1950-1959", 
+                             "1960-1969", "1970-1979", "1980-1989", 
+                             "1990-1999", "2000-2009", "2010-2019")) +
+                    theme(axis.text.x = element_text(angle = 45, hjust = 
+                          1))
+
+Forura_12 <- plot_Detection12(para_out$Formica_uralensis)
+Forura_l <- Forura_12 + theme_classic()
+
+#Formicoxenus nitidulus
+Fornit <- plot(para_out$Formicoxenus_nitidulus)
+
+Fornit_occ <- Fornit + theme_classic(base_size = 12) + 
+  scale_x_discrete(name ="Time period", 
+                    limits=c("1900-1909", "1910-1919", "1920-1929", 
+                             "1930-1939", "1940-1949", "1950-1959", 
+                             "1960-1969", "1970-1979", "1980-1989", 
+                             "1990-1999", "2000-2009", "2010-2019")) +
+  theme(axis.text.x = element_text(angle = 45, hjust = 
+                          1), legend.position = "none") +
+  ggtitle(" ") +
+  scale_y_continuous(limits=c(0,1), breaks=seq(0,1,0.1))
+
+Fornit_det <- plot_DetectionOne(para_out$Formicoxenus_nitidulus)
+Fornit_det2 <- Fornit_det + scale_x_discrete(name ="Time period", 
+                    limits=c("1900-1909", "1910-1919", "1920-1929", 
+                             "1930-1939", "1940-1949", "1950-1959", 
+                             "1960-1969", "1970-1979", "1980-1989", 
+                             "1990-1999", "2000-2009", "2010-2019")) +
+                    theme(axis.text.x = element_text(angle = 45, hjust = 
+                          1))
+
+Fornit_12 <- plot_Detection12(para_out$Formicoxenus_nitidulus)
+Fornit_l <- Fornit_12 + theme_classic()
+
+#Lasius fuliginosus
+Lasful <- plot(para_out$Lasius_fuliginosus)
+
+Lasful_occ <- Lasful + theme_classic(base_size = 12) + 
+  scale_x_discrete(name ="Time period", 
+                    limits=c("1900-1909", "1910-1919", "1920-1929", 
+                             "1930-1939", "1940-1949", "1950-1959", 
+                             "1960-1969", "1970-1979", "1980-1989", 
+                             "1990-1999", "2000-2009", "2010-2019")) +
+  theme(axis.text.x = element_text(angle = 45, hjust = 
+                          1), legend.position = "none") +
+  ggtitle(" ") +
+  scale_y_continuous(limits=c(0,1), breaks=seq(0,1,0.1))
+
+Lasful_det <- plot_DetectionOne(para_out$Lasius_fuliginosus)
+Lasful_det2 <- Lasful_det + scale_x_discrete(name ="Time period", 
+                    limits=c("1900-1909", "1910-1919", "1920-1929", 
+                             "1930-1939", "1940-1949", "1950-1959", 
+                             "1960-1969", "1970-1979", "1980-1989", 
+                             "1990-1999", "2000-2009", "2010-2019")) +
+                    theme(axis.text.x = element_text(angle = 45, hjust = 
+                          1))
+
+Lasful_12 <- plot_Detection12(para_out$Lasius_fuliginosus)
+Lasful_l <- Lasful_12 + theme_classic()
+
+#Lasius umbratus
+Lasumb <- plot(para_out$Lasius_umbratus)
+
+Lasumb_occ <- Lasumb + theme_classic(base_size = 12) + 
+  scale_x_discrete(name ="Time period", 
+                    limits=c("1900-1909", "1910-1919", "1920-1929", 
+                             "1930-1939", "1940-1949", "1950-1959", 
+                             "1960-1969", "1970-1979", "1980-1989", 
+                             "1990-1999", "2000-2009", "2010-2019")) +
+  theme(axis.text.x = element_text(angle = 45, hjust = 
+                          1), legend.position = "none") +
+  ggtitle(" ") +
+  scale_y_continuous(limits=c(0,1), breaks=seq(0,1,0.1))
+
+Lasumb_det <- plot_DetectionOne(para_out$Lasius_umbratus)
+Lasumb_det2 <- Lasumb_det + scale_x_discrete(name ="Time period", 
+                    limits=c("1900-1909", "1910-1919", "1920-1929", 
+                             "1930-1939", "1940-1949", "1950-1959", 
+                             "1960-1969", "1970-1979", "1980-1989", 
+                             "1990-1999", "2000-2009", "2010-2019")) +
+                    theme(axis.text.x = element_text(angle = 45, hjust = 
+                          1))
+
+Lasumb_12 <- plot_Detection12(para_out$Lasius_umbratus)
+Lasumb_l <- Lasumb_12 + theme_classic()
+
+#Myrmica rubra
+Myrrub <- plot(para_out$Myrmica_rubra)
+
+Myrrub_occ <- Myrrub + theme_classic(base_size = 12) + 
+  scale_x_discrete(name ="Time period", 
+                    limits=c("1900-1909", "1910-1919", "1920-1929", 
+                             "1930-1939", "1940-1949", "1950-1959", 
+                             "1960-1969", "1970-1979", "1980-1989", 
+                             "1990-1999", "2000-2009", "2010-2019")) +
+  theme(axis.text.x = element_text(angle = 45, hjust = 
+                          1), legend.position = "none") +
+  ggtitle(" ") +
+  scale_y_continuous(limits=c(0,1), breaks=seq(0,1,0.1))
+
+Myrrub_det <- plot_DetectionOne(para_out$Myrmica_rubra)
+Myrrub_det2 <- Myrrub_det + scale_x_discrete(name ="Time period", 
+                    limits=c("1900-1909", "1910-1919", "1920-1929", 
+                             "1930-1939", "1940-1949", "1950-1959", 
+                             "1960-1969", "1970-1979", "1980-1989", 
+                             "1990-1999", "2000-2009", "2010-2019")) +
+                    theme(axis.text.x = element_text(angle = 45, hjust = 
+                          1))
+
+Myrrub_12 <- plot_Detection12(para_out$Myrmica_rubra)
+Myrrub_l <- Myrrub_12 + theme_classic()
+
+#Myrmica ruginodis
+Myrrugi <- plot(para_out$Myrmica_ruginodis)
+
+Myrrugi_occ <- Myrrugi + theme_classic(base_size = 12) + 
+  scale_x_discrete(name ="Time period", 
+                    limits=c("1900-1909", "1910-1919", "1920-1929", 
+                             "1930-1939", "1940-1949", "1950-1959", 
+                             "1960-1969", "1970-1979", "1980-1989", 
+                             "1990-1999", "2000-2009", "2010-2019")) +
+  theme(axis.text.x = element_text(angle = 45, hjust = 
+                          1), legend.position = "none") +
+  ggtitle(" ") +
+  scale_y_continuous(limits=c(0,1), breaks=seq(0,1,0.1))
+
+Myrrugi_det <- plot_DetectionOne(para_out$Myrmica_ruginodis)
+Myrrugi_det2 <- Myrrugi_det + scale_x_discrete(name ="Time period", 
+                    limits=c("1900-1909", "1910-1919", "1920-1929", 
+                             "1930-1939", "1940-1949", "1950-1959", 
+                             "1960-1969", "1970-1979", "1980-1989", 
+                             "1990-1999", "2000-2009", "2010-2019")) +
+                    theme(axis.text.x = element_text(angle = 45, hjust = 
+                          1))
+
+Myrrugi_12 <- plot_Detection12(para_out$Myrmica_ruginodis)
+Myrrugi_l <- Myrrugi_12 + theme_classic()
+
+#Myrmica rugulosa
+Myrrug <- plot(para_out$Myrmica_rugulosa)
+
+Myrrug_occ <- Myrrug + theme_classic(base_size = 12) + 
+  scale_x_discrete(name ="Time period", 
+                    limits=c("1900-1909", "1910-1919", "1920-1929", 
+                             "1930-1939", "1940-1949", "1950-1959", 
+                             "1960-1969", "1970-1979", "1980-1989", 
+                             "1990-1999", "2000-2009", "2010-2019")) +
+  theme(axis.text.x = element_text(angle = 45, hjust = 
+                          1), legend.position = "none") +
+  ggtitle(" ") +
+  scale_y_continuous(limits=c(0,1), breaks=seq(0,1,0.1))
+
+Myrrug_det <- plot_DetectionOne(para_out$Myrmica_rugulosa)
+Myrrug_det2 <- Myrrug_det + scale_x_discrete(name ="Time period", 
+                    limits=c("1900-1909", "1910-1919", "1920-1929", 
+                             "1930-1939", "1940-1949", "1950-1959", 
+                             "1960-1969", "1970-1979", "1980-1989", 
+                             "1990-1999", "2000-2009", "2010-2019")) +
+                    theme(axis.text.x = element_text(angle = 45, hjust = 
+                          1))
+
+Myrrug_12 <- plot_Detection12(para_out$Myrmica_rugulosa)
+Myrrug_l <- Myrrug_12 + theme_classic()
+
+#Myrmica sabuleti
+Myrsab <- plot(para_out$Myrmica_sabuleti)
+
+Myrsab_occ <- Myrsab + theme_classic(base_size = 12) + 
+  scale_x_discrete(name ="Time period", 
+                    limits=c("1900-1909", "1910-1919", "1920-1929", 
+                             "1930-1939", "1940-1949", "1950-1959", 
+                             "1960-1969", "1970-1979", "1980-1989", 
+                             "1990-1999", "2000-2009", "2010-2019")) +
+  theme(axis.text.x = element_text(angle = 45, hjust = 
+                          1), legend.position = "none") +
+  ggtitle(" ") +
+  scale_y_continuous(limits=c(0,1), breaks=seq(0,1,0.1))
+
+Myrsab_det <- plot_DetectionOne(para_out$Myrmica_sabuleti)
+Myrsab_det2 <- Myrsab_det + scale_x_discrete(name ="Time period", 
+                    limits=c("1900-1909", "1910-1919", "1920-1929", 
+                             "1930-1939", "1940-1949", "1950-1959", 
+                             "1960-1969", "1970-1979", "1980-1989", 
+                             "1990-1999", "2000-2009", "2010-2019")) +
+                    theme(axis.text.x = element_text(angle = 45, hjust = 
+                          1))
+
+Myrsab_12 <- plot_Detection12(para_out$Myrmica_sabuleti)
+Myrsab_l <- Myrsab_12 + theme_classic()
+
+#Myrmica scabrinodis
+Myrsca <- plot(para_out$Myrmica_scabrinodis)
+
+Myrsca_occ <- Myrsca + theme_classic(base_size = 12) + 
+  scale_x_discrete(name ="Time period", 
+                    limits=c("1900-1909", "1910-1919", "1920-1929", 
+                             "1930-1939", "1940-1949", "1950-1959", 
+                             "1960-1969", "1970-1979", "1980-1989", 
+                             "1990-1999", "2000-2009", "2010-2019")) +
+  theme(axis.text.x = element_text(angle = 45, hjust = 
+                          1), legend.position = "none") +
+  ggtitle(" ") +
+  scale_y_continuous(limits=c(0,1), breaks=seq(0,1,0.1))
+
+Myrsca_det <- plot_DetectionOne(para_out$Myrmica_scabrinodis)
+Myrsca_det2 <- Myrsca_det + scale_x_discrete(name ="Time period", 
+                    limits=c("1900-1909", "1910-1919", "1920-1929", 
+                             "1930-1939", "1940-1949", "1950-1959", 
+                             "1960-1969", "1970-1979", "1980-1989", 
+                             "1990-1999", "2000-2009", "2010-2019")) +
+                    theme(axis.text.x = element_text(angle = 45, hjust = 
+                          1))
+
+Myrsca_12 <- plot_Detection12(para_out$Myrmica_scabrinodis)
+Myrsca_l <- Myrsca_12 + theme_classic()
+
+#Myrmica schencki
+Myrsch <- plot(para_out$Myrmica_schencki)
+
+Myrsch_occ <- Myrsch + theme_classic(base_size = 12) + 
+  scale_x_discrete(name ="Time period", 
+                    limits=c("1900-1909", "1910-1919", "1920-1929", 
+                             "1930-1939", "1940-1949", "1950-1959", 
+                             "1960-1969", "1970-1979", "1980-1989", 
+                             "1990-1999", "2000-2009", "2010-2019")) +
+  theme(axis.text.x = element_text(angle = 45, hjust = 
+                          1), legend.position = "none") +
+  ggtitle(" ") +
+  scale_y_continuous(limits=c(0,1), breaks=seq(0,1,0.1))
+
+Myrsch_det <- plot_DetectionOne(para_out$Myrmica_schencki)
+Myrsch_det2 <- Myrsch_det + scale_x_discrete(name ="Time period", 
+                    limits=c("1900-1909", "1910-1919", "1920-1929", 
+                             "1930-1939", "1940-1949", "1950-1959", 
+                             "1960-1969", "1970-1979", "1980-1989", 
+                             "1990-1999", "2000-2009", "2010-2019")) +
+                    theme(axis.text.x = element_text(angle = 45, hjust = 
+                          1))
+
+Myrsch_12 <- plot_Detection12(para_out$Myrmica_schencki)
+Myrsch_l <- Myrsch_12 + theme_classic()
+```
+
+# Occupancy and detection plots for species converged at 100,000 iterations
+
+## Load data, 100,000 iterations 
+
+```{r}
+load("C:/Users/julie/Documents/Projects/Occupancy/output/para_out_100_nyr.Rdata")
+
+para_out <- para_out_100
+
+for(i in 1:length(para_out)) names(para_out)[i] <- para_out[[i]]$SPP_NAM
+```
+
+
+```{r}
+#Formica fusca
+Forfus <- plot(para_out$Formica_fusca)
+
+Forfus_occ <- Forfus + theme_classic(base_size = 12) + 
+  scale_x_discrete(name ="Time period", 
+                    limits=c("1900-1909", "1910-1919", "1920-1929", 
+                             "1930-1939", "1940-1949", "1950-1959", 
+                             "1960-1969", "1970-1979", "1980-1989", 
+                             "1990-1999", "2000-2009", "2010-2019")) +
+  theme(axis.text.x = element_text(angle = 45, hjust = 
+                          1), legend.position = "none") +
+  ggtitle(" ") +
+  scale_y_continuous(limits=c(0,1), breaks=seq(0,1,0.1))
+
+Forfus_det <- plot_DetectionOne(para_out$Formica_fusca)
+Forfus_det2 <- Forfus_det + scale_x_discrete(name ="Time period", 
+                    limits=c("1900-1909", "1910-1919", "1920-1929", 
+                             "1930-1939", "1940-1949", "1950-1959", 
+                             "1960-1969", "1970-1979", "1980-1989", 
+                             "1990-1999", "2000-2009", "2010-2019")) +
+                    theme(axis.text.x = element_text(angle = 45, hjust = 
+                          1))
+
+Forfus_12 <- plot_Detection12(para_out$Formica_fusca)
+Forfus_l <- Forfus_12 + theme_classic()
+
+#Formica pratensis
+Forpra <- plot(para_out$Formica_pratensis)
+
+Forpra_occ <- Forpra + theme_classic(base_size = 12) + 
+  scale_x_discrete(name ="Time period", 
+                    limits=c("1900-1909", "1910-1919", "1920-1929", 
+                             "1930-1939", "1940-1949", "1950-1959", 
+                             "1960-1969", "1970-1979", "1980-1989", 
+                             "1990-1999", "2000-2009", "2010-2019")) +
+  theme(axis.text.x = element_text(angle = 45, hjust = 
+                          1), legend.position = "none") +
+  ggtitle(" ") +
+  scale_y_continuous(limits=c(0,1), breaks=seq(0,1,0.1))
+
+Forpra_det <- plot_DetectionOne(para_out$Formica_pratensis)
+Forpra_det2 <- Forpra_det + scale_x_discrete(name ="Time period", 
+                    limits=c("1900-1909", "1910-1919", "1920-1929", 
+                             "1930-1939", "1940-1949", "1950-1959", 
+                             "1960-1969", "1970-1979", "1980-1989", 
+                             "1990-1999", "2000-2009", "2010-2019")) +
+                    theme(axis.text.x = element_text(angle = 45, hjust = 
+                          1))
+
+Forpra_12 <- plot_Detection12(para_out$Formica_pratensis)
+Forpra_l <- Forpra_12 + theme_classic()
+
+#Lasius flavus
+Lasfla <- plot(para_out$Lasius_flavus)
+
+Lasfla_occ <- Lasfla + theme_classic(base_size = 12) + 
+  scale_x_discrete(name ="Time period", 
+                    limits=c("1900-1909", "1910-1919", "1920-1929", 
+                             "1930-1939", "1940-1949", "1950-1959", 
+                             "1960-1969", "1970-1979", "1980-1989", 
+                             "1990-1999", "2000-2009", "2010-2019")) +
+  theme(axis.text.x = element_text(angle = 45, hjust = 
+                          1), legend.position = "none") +
+  ggtitle(" ") +
+  scale_y_continuous(limits=c(0,1), breaks=seq(0,1,0.1))
+
+Lasfla_det <- plot_DetectionOne(para_out$Lasius_flavus)
+Lasfla_det2 <- Lasfla_det + scale_x_discrete(name ="Time period", 
+                    limits=c("1900-1909", "1910-1919", "1920-1929", 
+                             "1930-1939", "1940-1949", "1950-1959", 
+                             "1960-1969", "1970-1979", "1980-1989", 
+                             "1990-1999", "2000-2009", "2010-2019")) +
+                    theme(axis.text.x = element_text(angle = 45, hjust = 
+                          1))
+
+Lasfla_12 <- plot_Detection12(para_out$Lasius_flavus)
+Lasfla_l <- Lasfla_12 + theme_classic()
+
+#Leptothorax acervorum
+Lepace <- plot(para_out$Leptothorax_acervorum)
+
+Lepace_occ <- Lepace + theme_classic(base_size = 12) + 
+  scale_x_discrete(name ="Time period", 
+                    limits=c("1900-1909", "1910-1919", "1920-1929", 
+                             "1930-1939", "1940-1949", "1950-1959", 
+                             "1960-1969", "1970-1979", "1980-1989", 
+                             "1990-1999", "2000-2009", "2010-2019")) +
+  theme(axis.text.x = element_text(angle = 45, hjust = 
+                          1), legend.position = "none") +
+  ggtitle(" ") +
+  scale_y_continuous(limits=c(0,1), breaks=seq(0,1,0.1))
+
+Lepace_det <- plot_DetectionOne(para_out$Leptothorax_acervorum)
+Lepace_det2 <- Lepace_det + scale_x_discrete(name ="Time period", 
+                    limits=c("1900-1909", "1910-1919", "1920-1929", 
+                             "1930-1939", "1940-1949", "1950-1959", 
+                             "1960-1969", "1970-1979", "1980-1989", 
+                             "1990-1999", "2000-2009", "2010-2019")) +
+                    theme(axis.text.x = element_text(angle = 45, hjust = 
+                          1))
+
+Lepace_12 <- plot_Detection12(para_out$Leptothorax_acervorum)
+Lepace_l <- Lepace_12 + theme_classic()
+
+#Tetramorium caespitum
+Tetcae <- plot(para_out$Tetramorium_caespitum)
+
+Tetcae_occ <- Tetcae + theme_classic(base_size = 12) + 
+  scale_x_discrete(name ="Time period", 
+                    limits=c("1900-1909", "1910-1919", "1920-1929", 
+                             "1930-1939", "1940-1949", "1950-1959", 
+                             "1960-1969", "1970-1979", "1980-1989", 
+                             "1990-1999", "2000-2009", "2010-2019")) +
+  theme(axis.text.x = element_text(angle = 45, hjust = 
+                          1), legend.position = "none") +
+  ggtitle(" ") +
+  scale_y_continuous(limits=c(0,1), breaks=seq(0,1,0.1))
+
+Tetcae_det <- plot_DetectionOne(para_out$Tetramorium_caespitum)
+Tetcae_det2 <- Tetcae_det + scale_x_discrete(name ="Time period", 
+                    limits=c("1900-1909", "1910-1919", "1920-1929", 
+                             "1930-1939", "1940-1949", "1950-1959", 
+                             "1960-1969", "1970-1979", "1980-1989", 
+                             "1990-1999", "2000-2009", "2010-2019")) +
+                    theme(axis.text.x = element_text(angle = 45, hjust = 
+                          1))
+
+Tetcae_12 <- plot_Detection12(para_out$Tetramorium_caespitum)
+Tetcae_l <- Tetcae_12 + theme_classic()
+
+```
+
+# Occupancy and detection plots for species converged at 200,000 iterations
+
+## Load data, 200,000 iterations 
+
+```{r}
+load("C:/Users/julie/Documents/Projects/Occupancy/output/para_out_200_nyr.Rdata")
+
+para_out <- para_out_200
+
+for(i in 1:length(para_out)) names(para_out)[i] <- para_out[[i]]$SPP_NAM
+```
+
+```{r}
+
+#Formica exsecta, 200
+Forexs <- plot(para_out$Formica_exsecta)
+
+Forexs_occ <- Forexs + theme_classic(base_size = 12) + 
+  scale_x_discrete(name ="Time period", 
+                    limits=c("1900-1909", "1910-1919", "1920-1929", 
+                             "1930-1939", "1940-1949", "1950-1959", 
+                             "1960-1969", "1970-1979", "1980-1989", 
+                             "1990-1999", "2000-2009", "2010-2019")) +
+  theme(axis.text.x = element_text(angle = 45, hjust = 
+                          1), legend.position = "none") +
+  ggtitle(" ") +
+  scale_y_continuous(limits=c(0,1), breaks=seq(0,1,0.1))
+
+Forexs_det <- plot_DetectionOne(para_out$Formica_exsecta)
+Forexs_det2 <- Forexs_det + scale_x_discrete(name ="Time period", 
+                    limits=c("1900-1909", "1910-1919", "1920-1929", 
+                             "1930-1939", "1940-1949", "1950-1959", 
+                             "1960-1969", "1970-1979", "1980-1989", 
+                             "1990-1999", "2000-2009", "2010-2019")) +
+                    theme(axis.text.x = element_text(angle = 45, hjust = 
+                          1))
+
+Forexs_12 <- plot_Detection12(para_out$Formica_exsecta)
+Forexs_l <- Forexs_12 + theme_classic()
+
+#Formica picea, 200
+Forpic <- plot(para_out$Formica_picea)
+
+Forpic_occ <- Forpic + theme_classic(base_size = 12) + 
+  scale_x_discrete(name ="Time period", 
+                    limits=c("1900-1909", "1910-1919", "1920-1929", 
+                             "1930-1939", "1940-1949", "1950-1959", 
+                             "1960-1969", "1970-1979", "1980-1989", 
+                             "1990-1999", "2000-2009", "2010-2019")) +
+  theme(axis.text.x = element_text(angle = 45, hjust = 
+                          1), legend.position = "none") +
+  ggtitle(" ") +
+  scale_y_continuous(limits=c(0,1), breaks=seq(0,1,0.1))
+
+Forpic_det <- plot_DetectionOne(para_out$Formica_picea)
+Forpic_det2 <- Forpic_det + scale_x_discrete(name ="Time period", 
+                    limits=c("1900-1909", "1910-1919", "1920-1929", 
+                             "1930-1939", "1940-1949", "1950-1959", 
+                             "1960-1969", "1970-1979", "1980-1989", 
+                             "1990-1999", "2000-2009", "2010-2019")) +
+                    theme(axis.text.x = element_text(angle = 45, hjust = 
+                          1))
+
+Forpic_12 <- plot_Detection12(para_out$Formica_picea)
+Forpic_l <- Forpic_12 + theme_classic()
+
+#Myrmica lobicornis
+Myrlob <- plot(para_out$Myrmica_lobicornis)
+
+Myrlob_occ <- Myrlob + theme_classic(base_size = 12) + 
+  scale_x_discrete(name ="Time period", 
+                    limits=c("1900-1909", "1910-1919", "1920-1929", 
+                             "1930-1939", "1940-1949", "1950-1959", 
+                             "1960-1969", "1970-1979", "1980-1989", 
+                             "1990-1999", "2000-2009", "2010-2019")) +
+  theme(axis.text.x = element_text(angle = 45, hjust = 
+                          1), legend.position = "none") +
+  ggtitle(" ") +
+  scale_y_continuous(limits=c(0,1), breaks=seq(0,1,0.1))
+
+Myrlob_det <- plot_DetectionOne(para_out$Myrmica_lobicornis)
+Myrlob_det2 <- Myrlob_det + scale_x_discrete(name ="Time period", 
+                    limits=c("1900-1909", "1910-1919", "1920-1929", 
+                             "1930-1939", "1940-1949", "1950-1959", 
+                             "1960-1969", "1970-1979", "1980-1989", 
+                             "1990-1999", "2000-2009", "2010-2019")) +
+                    theme(axis.text.x = element_text(angle = 45, hjust = 
+                          1))
+
+Myrlob_12 <- plot_Detection12(para_out$Myrmica_lobicornis)
+Myrlob_l <- Myrlob_12 + theme_classic()
+
+```
+
+# Occupancy and detection plots for species converged at 400,000 iterations
+
+## Load data, 400,000 iterations 
+
+```{r}
+load("C:/Users/julie/Documents/Projects/Occupancy/output/para_out_400_nyr.Rdata")
+
+para_out <- para_out_400
+
+for(i in 1:length(para_out)) names(para_out)[i] <- para_out[[i]]$SPP_NAM
+```
+
+
+```{r}
+#Lasius niger
+Lasnig <- plot(para_out$Lasius_niger)
+
+Lasnig_occ <- Lasnig + theme_classic(base_size = 12) + 
+  scale_x_discrete(name ="Time period", 
+                    limits=c("1900-1909", "1910-1919", "1920-1929", 
+                             "1930-1939", "1940-1949", "1950-1959", 
+                             "1960-1969", "1970-1979", "1980-1989", 
+                             "1990-1999", "2000-2009", "2010-2019")) +
+  theme(axis.text.x = element_text(angle = 45, hjust = 
+                          1), legend.position = "none") +
+  ggtitle(" ") +
+  scale_y_continuous(limits=c(0,1), breaks=seq(0,1,0.1))
+
+Lasnig_det <- plot_DetectionOne(para_out$Lasius_niger)
+Lasnig_det2 <- Lasnig_det + scale_x_discrete(name ="Time period", 
+                    limits=c("1900-1909", "1910-1919", "1920-1929", 
+                             "1930-1939", "1940-1949", "1950-1959", 
+                             "1960-1969", "1970-1979", "1980-1989", 
+                             "1990-1999", "2000-2009", "2010-2019")) +
+                    theme(axis.text.x = element_text(angle = 45, hjust = 
+                          1))
+
+Lasnig_12 <- plot_Detection12(para_out$Lasius_niger)
+Lasnig_l <- Lasnig_12 + theme_classic()
+
+```
+
+
+# Occupancy and detection plots for species converged at 600,000 iterations
+
+## Load data, 600,000 iterations 
+
+```{r}
+load("C:/Users/julie/Documents/Projects/Occupancy/output/para_out_600_nyr.Rdata")
+
+para_out <- para_out_600
+
+for(i in 1:length(para_out)) names(para_out)[i] <- para_out[[i]]$SPP_NAM
+```
+
+```{r}
+#Lasius meridionalis, 600
+Lasmer <- plot(para_out$Lasius_meridionalis)
+
+Lasmer_occ <- Lasmer + theme_classic(base_size = 12) + 
+  scale_x_discrete(name ="Time period", 
+                    limits=c("1900-1909", "1910-1919", "1920-1929", 
+                             "1930-1939", "1940-1949", "1950-1959", 
+                             "1960-1969", "1970-1979", "1980-1989", 
+                             "1990-1999", "2000-2009", "2010-2019")) +
+  theme(axis.text.x = element_text(angle = 45, hjust = 
+                          1), legend.position = "none") +
+  ggtitle(" ") +
+  scale_y_continuous(limits=c(0,1), breaks=seq(0,1,0.1))
+
+Lasmer_det <- plot_DetectionOne(para_out$Lasius_meridionalis)
+Lasmer_det2 <- Lasmer_det + scale_x_discrete(name ="Time period", 
+                    limits=c("1900-1909", "1910-1919", "1920-1929", 
+                             "1930-1939", "1940-1949", "1950-1959", 
+                             "1960-1969", "1970-1979", "1980-1989", 
+                             "1990-1999", "2000-2009", "2010-2019")) +
+                    theme(axis.text.x = element_text(angle = 45, hjust = 
+                          1))
+
+Lasmer_12 <- plot_Detection12(para_out$Lasius_meridionalis)
+Lasmer_l <- Lasmer_12 + theme_classic()
+
+```
+
+```{r}
+#Create final supplementary figure
+Combi1 <- plot_grid(Camher_occ, Camher_det2, Camher_l, Forcin_occ, Forcin_det2, Forcin_l, Forcun_occ, Forcun_det2, Forcun_l, Forexs_occ, Forexs_det2, Forexs_l, align="h", axis = "bt", 
+                    labels = c("Camponotus herculeanus", "", "", "Formica cinerea", "", "", "Formica cunicularia", "", "", "Formica exsecta", "", ""),
+                    label_x= -0.15,
+                    rel_widths = c(1, 1, 1), 
+                    ncol = 3)
+
+ggsave("Combi1.pdf", width = 21, height = 29, units = c("cm"), dpi = 600, limitsize = TRUE)
+
+Combi2 <- plot_grid(Forfus_occ, Forfus_det2, Forfus_l, Forpic_occ, Forpic_det2, Forpic_l, Forpol_occ, Forpol_det2, Forpol_l, Forpra_occ, Forpra_det2, Forpra_l, align="h", axis = "bt", 
+                    labels = c("Formica fusca", "", "", "Formica picea", "", "", "Formica polyctena", "", "", "Formica pratensis", "", ""),
+                    label_x= -0.15,
+                    rel_widths = c(1, 1, 1), 
+                    ncol = 3)
+
+ggsave("Combi2.pdf", width = 21, height = 29, units = c("cm"), dpi = 600, limitsize = TRUE)
+
+Combi3 <- plot_grid(Forpre_occ, Forpre_det2, Forpre_l, Forruf_occ, Forruf_det2, Forruf_l, Forrufi_occ, Forrufi_det2, Forrufi_l, Forsan_occ, Forsan_det2, Forsan_l, align="h", axis = "bt", 
+                    labels = c("Formica pressilabris", "", "", "Formica rufa", "", "", "Formica rufibarbis", "", "", "Formica sanguinea", "", ""),
+                    label_x= -0.15,
+                    rel_widths = c(1, 1, 1), 
+                    ncol = 3)
+
+ggsave("Combi3.pdf", width = 21, height = 29, units = c("cm"), dpi = 600, limitsize = TRUE)
+
+
+Combi4 <- plot_grid(Fortru_occ, Fortru_det2, Fortru_l, Forura_occ, Forura_det2, Forura_l, Fornit_occ, Fornit_det2, Fornit_l, Lasfla_occ, Lasfla_det2, Lasfla_l, align="h", axis = "bt", 
+                    labels = c("Formica truncorum", "", "", "Formica uralensis", "", "", "Formicoxenus nitidulus", "", "", "Lasius flavus", "", ""),
+                    label_x= -0.15,
+                    rel_widths = c(1, 1, 1), 
+                    ncol = 3)
+
+ggsave("Combi4.pdf", width = 21, height = 29, units = c("cm"), dpi = 600, limitsize = TRUE)
+
+Combi5 <- plot_grid(Lasful_occ, Lasful_det2, Lasful_l, Lasmer_occ, Lasmer_det2, Lasmer_l, Lasnig_occ, Lasnig_det2, Lasnig_l, Lasumb_occ, Lasumb_det2, Lasumb_l, align="h", axis = "bt", 
+                    labels = c("Lasius fuliginosus", "", "", "Lasius meridionalis", "", "", "Lasius niger", "", "", "Lasius umbratus", "", ""),
+                    label_x= -0.15,
+                    rel_widths = c(1, 1, 1), 
+                    ncol = 3)
+
+ggsave("Combi5.pdf", width = 21, height = 29, units = c("cm"), dpi = 600, limitsize = TRUE)
+
+Combi6 <- plot_grid(Lepace_occ, Lepace_det2, Lepace_l, Myrlob_occ, Myrlob_det2, Myrlob_l, Myrrub_occ, Myrrub_det2, Myrrub_l, Myrrugi_occ, Myrrugi_det2, Myrrugi_l, align="h", axis = "bt", 
+                    labels = c("Leptothorax acervorum", "", "", "Myrmica lobicornis", "", "", "Myrmica rubra", "", "", "Myrmica ruginodis", "", ""),
+                    label_x= -0.15,
+                    rel_widths = c(1, 1, 1), 
+                    ncol = 3)
+
+ggsave("Combi6.pdf", width = 21, height = 29, units = c("cm"), dpi = 600, limitsize = TRUE)
+
+Combi7 <- plot_grid(Myrrug_occ, Myrrug_det2, Myrrug_l, Myrsab_occ, Myrsab_det2, Myrsab_l, Myrsca_occ, Myrsca_det2, Myrsca_l, Myrsch_occ, Myrsch_det2, Myrsch_l, align="h", axis = "bt", 
+                    labels = c("Myrmica rugulosa", "", "", "Myrmica sabuleti", "", "", "Myrmica scabrinodis", "", "", "Myrmica schencki", "", ""),
+                    label_x= -0.15,
+                    rel_widths = c(1, 1, 1), 
+                    ncol = 3)
+
+ggsave("Combi7.pdf", width = 21, height = 29, units = c("cm"), dpi = 600, limitsize = TRUE)
+
+Combi8 <- plot_grid(Tetcae_occ, Tetcae_det2, Tetcae_l, align="h", axis = "bt", 
+                    labels = c("Tetramorum caespitum", "", ""),
+                    label_x= -0.15,
+                    rel_widths = c(1, 1, 1), 
+                    ncol = 3)
+
+
+ggsave("Combi8.pdf", width = 21, height = 7.5, units = c("cm"), dpi = 600, limitsize = TRUE)
+
+```
+
+# Plot notes
+
+The figures created here using plotDetection12 shows ListLength on the x-axis. In this study we used categorical ListLengths and this is therefore equivalent to the 'datatype' categories in the paper. ListLength 1 = datatype1 = Natural History Museum of Denmark, Natural History Museum Aarhus, C. Skøtt, S. Schär and H. Holgersen. ListLength 2 = datatype2 = EuroAnts. ListLength 3 = datatype3 = The Ant Hunt.   
