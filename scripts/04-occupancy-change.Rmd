@@ -1,0 +1,425 @@
+---
+title: "Detailed changes"
+author: "Julie Sheard"
+date: "30/7/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Description
+This is the script to look at individual species trends within different time periods based on the direction of occupancy change.
+
+## Load packages
+```{r}
+library(sparta)
+library(bayestestR)
+```
+
+## Load data, 50,000 iterations
+```{r}
+load("C:/Users/julie/Documents/Projects/Occupancy/output/para_out_50_nyr.RData")
+
+para_out <- para_out_50
+
+for(i in 1:length(para_out)) names(para_out)[i] <- para_out[[i]]$SPP_NAM
+
+```
+
+
+#Species with 50,000 iterations
+##Camponotus herculeanus, continuous increase
+```{r}
+cdiff<-para_out$Camponotus_herculeanus$BUGSoutput$sims.matrix[,40]-para_out$Camponotus_herculeanus$BUGSoutput$sims.matrix[,34]
+Firsthi<-mean(cdiff < 0) #Highest in first tp
+Lasthi<-mean(cdiff > 0) #Highest in last tp
+ci_eti <- ci(cdiff, method = "ETi")
+mean(cdiff)
+ci_eti
+Firsthi
+Lasthi
+```
+
+##Formica cinerea, no change
+```{r}
+cdiff<-para_out$Formica_cinerea$BUGSoutput$sims.matrix[,40]-para_out$Formica_cinerea$BUGSoutput$sims.matrix[,34]
+Firsthi<-mean(cdiff < 0) #Highest in first tp
+Lasthi<-mean(cdiff > 0) #Highest in last tp
+ci_eti <- ci(cdiff, method = "ETi")
+mean(cdiff)
+ci_eti
+Firsthi
+Lasthi
+
+```
+
+##Formica cunicularia, no change
+```{r}
+cdiff<-para_out$Formica_cunicularia$BUGSoutput$sims.matrix[,40]-para_out$Formica_cunicularia$BUGSoutput$sims.matrix[,38]
+Firsthi<-mean(cdiff < 0) #Highest in first tp
+Lasthi<-mean(cdiff > 0) #Highest in last tp
+ci_eti <- ci(cdiff, method = "ETi")
+mean(cdiff)
+ci_eti
+Firsthi
+Lasthi
+```
+##Formica polyctena, mixed
+```{r}
+cdiff<-para_out$Formica_polyctena$BUGSoutput$sims.matrix[,40]-para_out$Formica_polyctena$BUGSoutput$sims.matrix[,38]
+Firsthi<-mean(cdiff < 0) #Highest in first tp
+Lasthi<-mean(cdiff > 0) #Highest in last tp
+ci_eti <- ci(cdiff, method = "ETi")
+mean(cdiff)
+ci_eti
+Firsthi
+Lasthi
+```
+
+##Formica pressilabris, no change
+```{r}
+cdiff<-para_out$Formica_pressilabris$BUGSoutput$sims.matrix[,40]-para_out$Formica_pressilabris$BUGSoutput$sims.matrix[,37]
+Firsthi<-mean(cdiff < 0) #Highest in first tp
+Lasthi<-mean(cdiff > 0) #Highest in last tp
+ci_eti <- ci(cdiff, method = "ETi")
+mean(cdiff)
+ci_eti
+Firsthi
+Lasthi
+```
+
+##Formica rufa, Mixed
+```{r}
+cdiff<-para_out$Formica_rufa$BUGSoutput$sims.matrix[,36]-para_out$Formica_rufa$BUGSoutput$sims.matrix[,29]
+Firsthi<-mean(cdiff < 0) #Highest in first tp
+Lasthi<-mean(cdiff > 0) #Highest in last tp
+ci_eti <- ci(cdiff, method = "ETi")
+mean(cdiff)
+ci_eti
+Firsthi
+Lasthi
+```
+
+##Formica rufibarbis, Mixed
+```{r}
+cdiff<-para_out$Formica_rufibarbis$BUGSoutput$sims.matrix[,32]-para_out$Formica_rufibarbis$BUGSoutput$sims.matrix[,29]
+Firsthi<-mean(cdiff < 0) #Highest in first tp
+Lasthi<-mean(cdiff > 0) #Highest in last tp
+ci_eti <- ci(cdiff, method = "ETi")
+mean(cdiff)
+ci_eti
+Firsthi
+Lasthi
+```
+
+##Formica sanguinea, mixed
+```{r}
+cdiff<-para_out$Formica_sanguinea$BUGSoutput$sims.matrix[,33]-para_out$Formica_sanguinea$BUGSoutput$sims.matrix[,29]
+Firsthi<-mean(cdiff < 0) #Highest in first tp
+Lasthi<-mean(cdiff > 0) #Highest in last tp
+ci_eti <- ci(cdiff, method = "ETi")
+mean(cdiff)
+ci_eti
+Firsthi
+Lasthi
+```
+
+##Formica truncorum, no change
+```{r}
+cdiff<-para_out$Formica_truncorum$BUGSoutput$sims.matrix[,32]-para_out$Formica_truncorum$BUGSoutput$sims.matrix[,29]
+Firsthi<-mean(cdiff < 0) #Highest in first tp
+Lasthi<-mean(cdiff > 0) #Highest in last tp
+ci_eti <- ci(cdiff, method = "ETi")
+mean(cdiff)
+ci_eti
+Firsthi
+Lasthi
+```
+
+##Formica uralensis
+```{r}
+cdiff<-para_out$Formica_uralensis$BUGSoutput$sims.matrix[,31]-para_out$Formica_uralensis$BUGSoutput$sims.matrix[,29]
+Firsthi<-mean(cdiff < 0) #Highest in first tp
+Lasthi<-mean(cdiff > 0) #Highest in last tp
+ci_eti <- ci(cdiff, method = "ETi")
+mean(cdiff)
+ci_eti
+Firsthi
+Lasthi
+```
+
+##Formicoxenus nitidulus
+```{r}
+cdiff<-para_out$Formicoxenus_nitidulus$BUGSoutput$sims.matrix[,31]-para_out$Formicoxenus_nitidulus$BUGSoutput$sims.matrix[,29]
+Firsthi<-mean(cdiff < 0) #Highest in first tp
+Lasthi<-mean(cdiff > 0) #Highest in last tp
+ci_eti <- ci(cdiff, method = "ETi")
+mean(cdiff)
+ci_eti
+Firsthi
+Lasthi
+```
+
+##Lasius fuliginosus 
+```{r}
+cdiff<-para_out$Lasius_fuliginosus$BUGSoutput$sims.matrix[,31]-para_out$Lasius_fuliginosus$BUGSoutput$sims.matrix[,29]
+Firsthi<-mean(cdiff < 0) #Highest in first tp
+Lasthi<-mean(cdiff > 0) #Highest in last tp
+ci_eti <- ci(cdiff, method = "ETi")
+mean(cdiff)
+ci_eti
+Firsthi
+Lasthi
+```
+
+##Lasius umbratus 
+```{r}
+cdiff<-para_out$Lasius_umbratus$BUGSoutput$sims.matrix[,36]-para_out$Lasius_umbratus$BUGSoutput$sims.matrix[,29]
+Firsthi<-mean(cdiff < 0) #Highest in first tp
+Lasthi<-mean(cdiff > 0) #Highest in last tp
+ci_eti <- ci(cdiff, method = "ETi")
+mean(cdiff)
+ci_eti
+Firsthi
+Lasthi
+```
+
+##Myrmica rubra
+```{r}
+cdiff<-para_out$Myrmica_rubra$BUGSoutput$sims.matrix[,31]-para_out$Myrmica_rubra$BUGSoutput$sims.matrix[,29]
+Firsthi<-mean(cdiff < 0) #Highest in first tp
+Lasthi<-mean(cdiff > 0) #Highest in last tp
+ci_eti <- ci(cdiff, method = "ETi")
+mean(cdiff)
+ci_eti
+Firsthi
+Lasthi
+```
+
+##Myrmica ruginodis
+```{r}
+cdiff<-para_out$Myrmica_ruginodis$BUGSoutput$sims.matrix[,31]-para_out$Myrmica_ruginodis$BUGSoutput$sims.matrix[,29]
+Firsthi<-mean(cdiff < 0) #Highest in first tp
+Lasthi<-mean(cdiff > 0) #Highest in last tp
+ci_eti <- ci(cdiff, method = "ETi")
+mean(cdiff)
+ci_eti
+Firsthi
+Lasthi
+```
+
+##Myrmica rugulosa
+```{r}
+cdiff<-para_out$Myrmica_rugulosa$BUGSoutput$sims.matrix[,30]-para_out$Myrmica_rugulosa$BUGSoutput$sims.matrix[,29]
+Firsthi<-mean(cdiff < 0) #Highest in first tp
+Lasthi<-mean(cdiff > 0) #Highest in last tp
+ci_eti <- ci(cdiff, method = "ETi")
+mean(cdiff)
+ci_eti
+Firsthi
+Lasthi
+```
+
+##Myrmica sabuleti
+```{r}
+cdiff<-para_out$Myrmica_sabuleti$BUGSoutput$sims.matrix[,33]-para_out$Myrmica_sabuleti$BUGSoutput$sims.matrix[,29]
+Firsthi<-mean(cdiff < 0) #Highest in first tp
+Lasthi<-mean(cdiff > 0) #Highest in last tp
+ci_eti <- ci(cdiff, method = "ETi")
+mean(cdiff)
+Firsthi
+Lasthi
+ci_eti
+```
+
+##Myrmica scabrinodis
+```{r}
+cdiff<-para_out$Myrmica_scabrinodis$BUGSoutput$sims.matrix[,33]-para_out$Myrmica_scabrinodis$BUGSoutput$sims.matrix[,29]
+Firsthi<-mean(cdiff < 0) #Highest in first tp
+Lasthi<-mean(cdiff > 0) #Highest in last tp
+ci_eti <- ci(cdiff, method = "ETi")
+mean(cdiff)
+ci_eti
+Firsthi
+Lasthi
+```
+
+##Myrmica schencki
+```{r}
+cdiff<-para_out$Myrmica_schencki$BUGSoutput$sims.matrix[,30]-para_out$Myrmica_schencki$BUGSoutput$sims.matrix[,29]
+Firsthi<-mean(cdiff < 0) #Highest in first tp
+Lasthi<-mean(cdiff > 0) #Highest in last tp
+ci_eti <- ci(cdiff, method = "ETi")
+mean(cdiff)
+ci_eti
+Firsthi
+Lasthi
+```
+
+#Load data, 100,000 iterations
+
+```{r}
+load("C:/Users/julie/Documents/Projects/Occupancy/output/para_out_100_nyr.Rdata") 
+
+para_out <- para_out_100
+
+for(i in 1:length(para_out)) names(para_out)[i] <- para_out[[i]]$SPP_NAM
+```
+
+#Species with 100,000 iterations
+##Formica fusca
+```{r}
+cdiff<-para_out$Formica_fusca$BUGSoutput$sims.matrix[,32]-para_out$Formica_fusca$BUGSoutput$sims.matrix[,29]
+Firsthi<-mean(cdiff < 0) #Highest in first tp
+Lasthi<-mean(cdiff > 0) #Highest in last tp
+ci_eti <- ci(cdiff, method = "ETi")
+mean(cdiff)
+ci_eti
+Firsthi
+Lasthi
+```
+
+##Formica pratensis
+```{r}
+cdiff<-para_out$Formica_pratensis$BUGSoutput$sims.matrix[,40]-para_out$Formica_pratensis$BUGSoutput$sims.matrix[,36]
+Firsthi<-mean(cdiff < 0) #Highest in first tp
+Lasthi<-mean(cdiff > 0) #Highest in last tp
+ci_eti <- ci(cdiff, method = "ETi")
+mean(cdiff)
+ci_eti
+Firsthi
+Lasthi
+```
+
+##Lasius flavus
+```{r}
+cdiff<-para_out$Lasius_flavus$BUGSoutput$sims.matrix[,30]-para_out$Lasius_flavus$BUGSoutput$sims.matrix[,29]
+Firsthi<-mean(cdiff < 0) #Highest in first tp
+Lasthi<-mean(cdiff > 0) #Highest in last tp
+ci_eti <- ci(cdiff, method = "ETi")
+mean(cdiff)
+ci_eti
+Firsthi
+Lasthi
+```
+
+##Leptothorax acervorum
+```{r}
+cdiff<-para_out$Leptothorax_acervorum$BUGSoutput$sims.matrix[,36]-para_out$Leptothorax_acervorum$BUGSoutput$sims.matrix[,29]
+Firsthi<-mean(cdiff < 0) #Highest in first tp
+Lasthi<-mean(cdiff > 0) #Highest in last tp
+ci_eti <- ci(cdiff, method = "ETi")
+mean(cdiff)
+ci_eti
+Firsthi
+Lasthi
+```
+
+##Tetramorium caespitum
+```{r}
+cdiff<-para_out$Tetramorium_caespitum$BUGSoutput$sims.matrix[,32]-para_out$Tetramorium_caespitum$BUGSoutput$sims.matrix[,29]
+Firsthi<-mean(cdiff < 0) #Highest in first tp
+Lasthi<-mean(cdiff > 0) #Highest in last tp
+ci_eti <- ci(cdiff, method = "ETi")
+mean(cdiff)
+ci_eti
+Firsthi
+Lasthi
+```
+
+
+
+
+#Load data, 200,000 iterations
+
+```{r}
+load("C:/Users/julie/Documents/Projects/Occupancy/output/para_out_200_nyr.Rdata") 
+
+para_out <- para_out_200
+
+for(i in 1:length(para_out)) names(para_out)[i] <- para_out[[i]]$SPP_NAM
+```
+
+#Species with 200,000 iterations
+##Formica exsecta
+```{r}
+cdiff<-para_out$Formica_exsecta$BUGSoutput$sims.matrix[,30]-para_out$Formica_exsecta$BUGSoutput$sims.matrix[,29]
+Firsthi<-mean(cdiff < 0) #Highest in first tp
+Lasthi<-mean(cdiff > 0) #Highest in last tp
+ci_eti <- ci(cdiff, method = "ETi")
+mean(cdiff)
+ci_eti
+Firsthi
+Lasthi
+```
+
+##Formica picea
+```{r}
+cdiff<-para_out$Formica_picea$BUGSoutput$sims.matrix[,36]-para_out$Formica_picea$BUGSoutput$sims.matrix[,29]
+Firsthi<-mean(cdiff < 0) #Highest in first tp
+Lasthi<-mean(cdiff > 0) #Highest in last tp
+ci_eti <- ci(cdiff, method = "ETi")
+mean(cdiff)
+ci_eti
+Firsthi
+Lasthi
+```
+
+##Myrmica lobicornis
+```{r}
+cdiff<-para_out$Myrmica_lobicornis$BUGSoutput$sims.matrix[,33]-para_out$Myrmica_lobicornis$BUGSoutput$sims.matrix[,29]
+Firsthi<-mean(cdiff < 0) #Highest in first tp
+Lasthi<-mean(cdiff > 0) #Highest in last tp
+ci_eti <- ci(cdiff, method = "ETi")
+mean(cdiff)
+ci_eti
+Firsthi
+Lasthi
+```
+
+#Load data, 400,000 iterations
+
+```{r}
+load("C:/Users/julie/Documents/Projects/Occupancy/output/para_out_400_nyr.Rdata") 
+
+para_out <- para_out_400
+
+for(i in 1:length(para_out)) names(para_out)[i] <- para_out[[i]]$SPP_NAM
+```
+
+#Species with 400,000 iterations
+##Lasius niger
+```{r}
+cdiff<-para_out$Lasius_niger$BUGSoutput$sims.matrix[,30]-para_out$Lasius_niger$BUGSoutput$sims.matrix[,29]
+Firsthi<-mean(cdiff < 0) #Highest in first tp
+Lasthi<-mean(cdiff > 0) #Highest in last tp
+ci_eti <- ci(cdiff, method = "ETi")
+mean(cdiff)
+ci_eti
+Firsthi
+Lasthi
+```
+
+#Load data 600,000 iterations
+```{r}
+load("C:/Users/julie/Documents/Projects/Occupancy/output/para_out_600_nyr.Rdata") 
+
+para_out <- para_out_600
+
+for(i in 1:length(para_out)) names(para_out)[i] <- para_out[[i]]$SPP_NAM
+```
+
+#Species with 600,000 iterations
+##Lasius meridionalis
+```{r}
+cdiff<-para_out$Lasius_meridionalis$BUGSoutput$sims.matrix[,30]-para_out$Lasius_meridionalis$BUGSoutput$sims.matrix[,29]
+Firsthi<-mean(cdiff < 0) #Highest in first tp
+Lasthi<-mean(cdiff > 0) #Highest in last tp
+ci_eti <- ci(cdiff, method = "ETi")
+mean(cdiff)
+ci_eti
+Firsthi
+Lasthi
+```
