@@ -45,6 +45,7 @@ Based on the analyses of the combined data, further data sets were created, whic
 
 #### Code for figures
 
+* fig 1a-temporal distribution.Rmd
 * fig 2-occupancy trends.Rmd
 * fig S3-list lengths.Rmd
 * fig S4-individual species plots.Rmd
