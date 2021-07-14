@@ -42,6 +42,7 @@ Based on the analyses of the combined data, further data sets were created, whic
 * 01-format-data.Rmd
 * 02-run-model.Rmd
 * 03-occupancy-analysis.Rmd
+* 04-occupancy-change.Rmd
 
 #### Code for figures
 
