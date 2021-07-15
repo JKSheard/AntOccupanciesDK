@@ -52,9 +52,9 @@ Point_fluc <- points[points$Trend== 'Fluctuating',]
   labs(y="Occupancy", x = "")+
   scale_color_manual(values = c("#543005", "#66c2a4", "#67A9CF", "#D94801")) +
   geom_dl(aes(label = ID), method = list("last.bumpup",
-          cex = 0.9)) +
+          cex = 1.2)) +
   scale_y_continuous(limits=c(0,1.1), breaks=seq(0,1,0.1)) +
-  theme_classic(base_size = 12)+
+  theme_classic(base_size = 20)+
   theme(panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(),
         plot.title = element_text(margin = margin(b = -20)),
@@ -70,9 +70,9 @@ Point_fluc <- points[points$Trend== 'Fluctuating',]
     labs(y="", x = "")+
     scale_color_manual(values = c("#54278f", "#a63603", "#fd8d3c", "#fdd0a2")) +
     geom_dl(aes(label = ID), method = list("last.bumpup",
-          cex = 0.9)) +
+          cex = 1.2)) +
     scale_y_continuous(limits=c(0,1.1), breaks=seq(0,1,0.1)) +
-    theme_classic(base_size = 12)+
+    theme_classic(base_size = 20)+
     theme(panel.grid.major = element_blank(),
           panel.grid.minor = element_blank(),
           legend.position = "none",
@@ -85,11 +85,11 @@ Point_fluc <- points[points$Trend== 'Fluctuating',]
     geom_point(data=Point_fluc, size=2, aes(x=TP, y=Occupancy, group = Species,  color = Species, fill=Species)) +
     ggtitle("  c) Fluctuating") +
     labs(y="Occupancy", x = "Decade")+
-    scale_color_manual(values = c("#99d8c9", "#3690c0", "#2A91A6", "#015C63", "#9e9ac8", "#824B08")) +
+    scale_color_manual(values = c("#99d8c9", "#3690c0", "#2A91A6", "#015C63", "#9e9ac8", "#f16913", "#824B08")) +
     geom_dl(aes(label = ID), method = list("last.bumpup",
-          cex = 0.9)) +
+          cex = 1.2)) +
     scale_y_continuous(limits=c(0,1.1), breaks=seq(0,1,0.1)) +
-    theme_classic(base_size = 12)+
+    theme_classic(base_size = 20)+
     theme(panel.grid.major = element_blank(),
           panel.grid.minor = element_blank(),
           plot.title = element_text(margin = margin(b = -20)),
@@ -104,18 +104,17 @@ Point_fluc <- points[points$Trend== 'Fluctuating',]
     labs(y="", x = "Decade")+
      scale_color_manual(values = c("#00441b", "#006d2c", "#238b45", "#41ae76", "#ccece6", "#B8E1E6", 
                                    "#02818a", "#df65b0", "#3f007d", "#6a51a3", "#807dba", "#fee391",
-                                   "#8c2d04", "#f16913", "#fdae6b")) +
+                                   "#8c2d04", "#fdae6b")) +
     geom_dl(aes(label = ID), method = list("last.bumpup",
-          cex = 0.9)) +
+          cex = 1.2)) +
     scale_y_continuous(limits=c(0,1.1), breaks=seq(0,1,0.1)) +
-    theme_classic(base_size = 12)+
+    theme_classic(base_size = 20)+
     theme(panel.grid.major = element_blank(),
           panel.grid.minor = element_blank(),
           plot.title = element_text(margin = margin(b = -20)),
           legend.position = "none",
           axis.text    = element_text(),
           axis.text.x = element_text(angle = 45, hjust =1))   )
-
 ```
 
 # Arrange and save plot as .png
