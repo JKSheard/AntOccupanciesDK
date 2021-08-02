@@ -43,7 +43,7 @@ Based on the analyses of the combined data, further data sets were created, whic
 * 02-run-model.Rmd
 * 03-occupancy-analysis.Rmd
 * 04-occupancy-change.Rmd
-* fig S7-uncertainty.Rmd
+* 05-model-uncertainty.Rmd
 
 #### Code for figures
 
