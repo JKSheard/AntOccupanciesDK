@@ -43,6 +43,7 @@ Based on the analyses of the combined data, further data sets were created, whic
 * 02-run-model.Rmd
 * 03-occupancy-analysis.Rmd
 * 04-occupancy-change.Rmd
+* fig S7-uncertainty.Rmd
 
 #### Code for figures
 
@@ -50,7 +51,7 @@ Based on the analyses of the combined data, further data sets were created, whic
 * fig 2-occupancy trends.Rmd
 * fig S3-list lengths.Rmd
 * fig S4-individual species plots.Rmd
-* fig S6-uncertainty.Rmd
+* fig S7-uncertainty.Rmd
 
 #### Code for functions
 
