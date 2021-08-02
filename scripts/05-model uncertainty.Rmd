@@ -1,0 +1,51 @@
+---
+title: "Uncertainty figure analysis"
+author: "Julie K. Sheard"
+date: "18 jul 2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Initial set-up
+
+## Load packages
+```{r}
+library(ggplot2)
+library(ggpubr)
+library(cowplot)
+library(dplyr)
+```
+
+## Load data
+```{r}
+df <- read.csv("../data/ci_decades.csv", sep=",", header = TRUE)
+
+```
+
+##Calculate values
+```{r}
+Detections<-df %>%                              
+  group_by(Species) %>%                         
+  summarise(Obs=sum(Detections), Uncertainty=median(SD.breadth))
+
+cor(Detections$Obs, Detections$Uncertainty, method = c("spearman"))
+test<-cor.test(Detections$Obs, Detections$Uncertainty, method = c("spearman"))
+
+Occupancy<-df %>%                                        
+  group_by(Species) %>%                         
+  summarise(Occ=median(Mean.occupancy), Uncertainty=median(SD.breadth))
+
+cor(Occupancy$Occ, Occupancy$Uncertainty, method = c("spearman"))
+cor.test(Occupancy$Occ, Occupancy$Uncertainty, method = c("spearman"))
+
+Decade<-df %>%                                        
+  group_by(Decade) %>%                         
+  summarise(Uncertainty=median(SD.breadth)) 
+
+cor(Decade$Decade, Decade$Uncertainty, method = c("spearman"))
+cor.test(Decade$Decade, Decade$Uncertainty, method = c("spearman"))
+
+```
