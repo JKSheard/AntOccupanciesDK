@@ -1,0 +1,128 @@
+---
+title: "Uncertainty figure analysis"
+author: "Julie K. Sheard"
+date: "18 jul 2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Initial set-up
+
+## Load packages
+```{r}
+library(ggplot2)
+library(ggpubr)
+library(cowplot)
+library(dplyr)
+```
+
+## Load data
+```{r}
+df <- read.csv("../data/ci_decades.csv", sep=",", header = TRUE)
+
+```
+
+##Calculate values
+```{r}
+Detections<-df %>%                              
+  group_by(Species) %>%                         
+  summarise(Obs=sum(Detections), Uncertainty=median(SD.breadth))
+```
+
+
+# Create figure 
+
+## Plot uncertainty against observations per species per decade
+```{r}
+(Obs<- ggplot(aes(y=Uncertainty, x=Obs), data = Detections)+ 
+   geom_point() +
+   theme_classic(base_size = 10) +
+   stat_cor(method="spearman", label.x=10, label.y=1) +
+   ylim(0,1)+
+   ylab("Uncertainty") +
+   xlab("Detections") + 
+   theme(legend.title = element_blank(),
+         legend.position = "none",
+         legend.text = element_text(face = "italic"), 
+         panel.border = element_blank(),
+         panel.grid.major = element_blank(),
+         panel.grid.minor = element_blank(),
+         # Change axis line
+         axis.line = element_line(colour = "black"),
+         #legend.position = "none",
+         axis.text=element_text(size=10),
+         axis.title=element_text(size=12,face="bold")) +
+   guides(fill=guide_legend(keywidth=0.4,
+         keyheight=0.1,
+         default.unit="inch")
+ ))
+```
+
+## Plot uncertainty against occupancy for each species in each decade
+```{r}
+(Occ<- ggplot(aes(y=Uncertainty, x=Occ), data = Occupancy)+ 
+   geom_point() +
+   geom_smooth(colour = "black", method = lm, formula = y ~ x + I(x^2), se = FALSE) +
+   theme_classic(base_size = 10) +
+   stat_cor(method="spearman", label.x=0, label.y=1) +
+   ylim(0,1)+
+   ylab("") +
+   xlab("Occupancy") + 
+   theme(legend.title = element_blank(),
+         legend.position = "none",
+         legend.text = element_text(face = "italic"), 
+         panel.border = element_blank(),
+         panel.grid.major = element_blank(),
+         panel.grid.minor = element_blank(),
+         # Change axis line
+         axis.line = element_line(colour = "black"),
+         #legend.position = "none",
+         axis.text=element_text(size=10),
+         axis.title=element_text(size=12,face="bold")) +
+   guides(fill=guide_legend(keywidth=0.4,
+         keyheight=0.1,
+         default.unit="inch")
+ ))
+```
+
+## Plot unceertainty against decade
+```{r}
+
+(tp<- ggplot(aes(y=Uncertainty, x=Decade), data = Decade)+ 
+   geom_point() +
+   theme_classic(base_size = 10) +
+   stat_cor(method="spearman", label.x=1, label.y=1) +
+   ylim(0,1)+
+   ylab("") +
+   xlab("Decade") + 
+   scale_x_continuous(breaks = seq(1, 12, by = 1), labels=c("1" = "1900-1909", "2" = "", "3" = "", "4" = "", "5" = "", "6" = "1950-1959", "7" = "", "8" = "", "9" = "", "10" = "", "11" = "2000-2009", "12" = "" )) +
+   theme(legend.title = element_blank(),
+         legend.text = element_text(face = "italic"), 
+         panel.border = element_blank(),
+         panel.grid.major = element_blank(),
+         panel.grid.minor = element_blank(),
+         # Change axis line
+         axis.line = element_line(colour = "black"),
+         legend.position = "none",
+         axis.text=element_text(size=10),
+         axis.title=element_text(size=12,face="bold")) +
+   guides(fill=guide_legend(keywidth=0.4,
+         keyheight=0.1,
+         default.unit="inch")
+ ))
+```
+
+## Arrange plots 
+```{r}
+png("FigS7.png", width = 1100, height = 350)
+plot_grid(Obs, Occ, tp, ncol=3, align="v", labels = c("a)", "b)", "c)"))
+dev.off()
+
+FigS7<-plot_grid(Obs, Occ, tp, ncol=3, align="v", labels = c("a)", "b)", "c)"))
+
+ggsave("FigS7.pdf", width = 248, height = 88, units = c("mm"), dpi = 600, limitsize = TRUE)
+```
+
