@@ -3,7 +3,7 @@
 Authors: [Julie K. Sheard](https://github.com/JKSheard)
 
 This repository contains the code for:
->Sheard, J.K., Rahbek, C., Dunn, R.R., Sanders, N.J. & Isaac, N.J.B. (in review) Long-term trends in the occupancy of ants revealed through use of multi-sourced data sets 
+>Sheard, J.K., Rahbek, C., Dunn, R.R., Sanders, N.J. & Isaac, N.J.B. (2021) Long-term trends in the occupancy of ants revealed through use of multi-sourced data sets. Biology Letters 17: 20210240. https://doi.org/10.1098/rsbl.2021.0240 
 
 ## Data
 We used seven sources of data: 1. pinned specimen records from the Natural History Museum of Denmark, 2. pinned specimen records from the Natural History Museum of Aarhus, 3. specimen records from the Natural History Museum of Stavanger, collected by Holger Holgersen, 4. observation records from AntWeb collected by Sämi Schär, 5. observation records from Christian Skøtt, 6. observation records from the EuroAnts course and 7. preserved specimen records from the Ant Hunt. The raw data sets are available from GBIF:
